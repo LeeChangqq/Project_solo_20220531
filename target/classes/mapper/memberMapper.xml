@@ -5,34 +5,33 @@
 
 <mapper namespace="Member">
     <insert id="save" parameterType="member">
-        insert into m_table (memberId, memberPassword, memberName, memberEmail, memberMobile, memberLocal, memberLocal2, memberLocal3) values (#{memberId}, #{memberPassword}, #{memberName}, #{memberEmail}, #{memberMobile}, #{memberLocal}, #{memberLocal2}, #{memberLocal3})
+        insert into member_table (memberId, memberPassword, memberName, memberEmail, memberMobile, memberLocal, memberLocal2, memberLocal3) values (#{memberId}, #{memberPassword}, #{memberName}, #{memberEmail}, #{memberMobile}, #{memberLocal}, #{memberLocal2}, #{memberLocal3})
     </insert>
-<!--    <select id="login" parameterType="member" resultType="member">-->
-<!--        select * from m_table where mId=#{mId} and mPass=#{mPass}-->
-<!--    </select>-->
-<!--    <select id="findById" resultType="member" parameterType="Long">-->
-<!--        select * from m_table where id=#{id}-->
-<!--    </select>-->
-    <select id="check" parameterType="String" resultType="String">
-        select memberId from m_table where memberId=#{memberId}
+    <select id="login" parameterType="member" resultType="member">
+        select * from member_table where memberId=#{memberId} and memberPassword=#{memberPassword}
     </select>
-<!--    <select id="pagingList" parameterType="java.util.HashMap" resultType="member">-->
-<!--        select * from m_table order by id desc limit #{start}, #{limit}-->
-<!--        &#45;&#45; HashMap = 여기서 parameterType을 java.util.HashMap으로 준다-->
-<!--    </select>-->
-
-<!--    <select id="count" resultType="int">-->
-<!--        select count(id) from m_table-->
-<!--    </select>-->
-<!--    <update id="update" parameterType="member">-->
-<!--        update m_table set mPass=#{mPass}, mPass2=#{mPass2}, mName=#{mName}, mEmail=#{mEmail}, mPhone=#{mPhone}, mPro=#{mPro} where id=#{id}-->
-<!--    </update>-->
-<!--    <select id="findAll" resultType="member" parameterType="member">-->
-<!--        select * from m_table-->
-<!--    </select>-->
-<!--    <delete id="delete" parameterType="Long">-->
-<!--        delete from m_table where id= #{id}-->
-<!--    </delete>-->
+    <select id="findById" resultType="member" parameterType="Long">
+        select * from m_table where id=#{id}
+    </select>
+    <select id="check" parameterType="String" resultType="String">
+        select memberId from member_table where memberId=#{memberId}
+    </select>
+    <select id="count" resultType="int">
+        select count(id) from member_table
+    </select>
+    <select id="pagingList" parameterType="java.util.HashMap" resultType="member">
+        select * from member_table order by id desc limit #{start}, #{limit}
+        -- HashMap = 여기서 parameterType을 java.util.HashMap으로 준다
+    </select>
+    <update id="update" parameterType="member">
+        update member_table set memberPassword=#{memberPassword}, memberName=#{memberName}, memberEmail=#{memberEmail}, memberMobile=#{memberMobile}, memberLocal=#{memberLocal}, memberLocal2=#{memberLocal2} where id=#{id}
+    </update>
+    <select id="findAll" resultType="member" parameterType="member">
+        select * from member_table
+    </select>
+    <delete id="delete" parameterType="Long">
+        delete from member_table where id= #{id}
+    </delete>
 </mapper>
 
 

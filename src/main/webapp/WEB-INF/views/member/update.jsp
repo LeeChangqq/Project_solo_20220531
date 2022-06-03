@@ -137,66 +137,41 @@
     </style>
 </head>
 <body>
-        <form action="/member/save" method="post" class="joinForm" name="saveForm">
-            <h2>회원가입</h2>
-            <div class="textForm">
-                <input type="text" name="memberId" placeholder="아이디" id="memberId" class="id" onblur="idCheck()">
-                <span id="r"></span>
-            </div>
-            <div class="textForm">
-                <input type="text" name="memberPassword" placeholder="비밀번호" id="memberPassword" class="pw" onblur="pCheck()">
-                <span id="r1"></span>
-            </div>
-            <div class="textForm">
-                <input type="text" name="memberPassword2" placeholder="비밀번호" id="memberPassword2" class="pw" onblur="pCheck2()">
-                <span id="r2"></span>
-            </div>
-            <div class="textForm">
-                <input type="text" name="memberName" placeholder="이름" id="memberName" class="name" onblur="name1()">
-                <span id="r3"></span>
-            </div>
-            <div class="textForm">
-                <input type="text" name="memberMobile" placeholder="010-0000-0000" id="memberMobile" class="cellphoneNo" onblur="phone1()">
-                <span id="r5"></span>
-            </div>
-            <div class="textForm">
-                <input type="text" name="memberEmail" placeholder="이메일" id="memberEmail" class="email" onblur="email1()">
-                <span id="r4"></span>
-            </div>
-            <div class="textForm">
-                <input type="text" name="memberLocal" placeholder="주소" id="sample5_address" class="nickname" onblur="local()">
-                <input type="text" name="memberLocal2" placeholder="상세 주소입력" id="local" class="nickname" onblur="local()">
-                <span id="r6"></span>
-            </div>
-            <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="btn">
-            <input type="button" onclick="click1()" value="가입하기" class="btn">
-        </form>
+<form action="/member/update" method="post" class="joinForm" name="updateForm">
+    <h2>회원정보 수정</h2>
+    <input name="id" type="hidden" value="${updateMember.id}" readonly>
+    <input name="memberId" type="hidden" value="${updateMember.memberId}" readonly>
+    <div class="textForm">
+        <input type="text" name="memberPassword" placeholder="비밀번호" id="memberPassword" class="pw" onblur="pCheck()" value="${updateMember.memberPassword}">
+        <span id="r1"></span>
+    </div>
+    <div class="textForm">
+        <input type="text" name="memberPassword2" placeholder="비밀번호" id="memberPassword2" class="pw" onblur="pCheck2()">
+        <span id="r2"></span>
+    </div>
+    <div class="textForm">
+        <input type="text" name="memberName" placeholder="이름" id="memberName" class="name" onblur="name1()" value="${updateMember.memberName}">
+        <span id="r3"></span>
+    </div>
+    <div class="textForm">
+        <input type="text" name="memberMobile" placeholder="010-0000-0000" id="memberMobile" class="cellphoneNo" value="${updateMember.memberMobile}" onblur="phone1()">
+        <span id="r5"></span>
+    </div>
+    <div class="textForm">
+        <input type="text" name="memberEmail" placeholder="이메일" id="memberEmail" class="email" onblur="email1()" value="${updateMember.memberEmail}">
+        <span id="r4"></span>
+    </div>
+    <div class="textForm">
+        <input type="text" name="memberLocal" placeholder="주소" id="sample5_address" class="nickname" onblur="local()" value="${updateMember.memberLocal}">
+        <input type="text" name="memberLocal2" placeholder="상세 주소입력" id="local" class="nickname" onblur="local()" value="${updateMember.memberLocal2}">
+        <span id="r6"></span>
+    </div>
+    <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="btn">
+    <input type="button" onclick="click1()" value="수정하기" class="btn">
+    <input type="button" onclick="c()" value="취소" class="btn">
+</form>
 </body>
 <script>
-    const idCheck = () => {
-        const memberId = document.getElementById("memberId").value;
-        const  r = document.getElementById("r");
-        $.ajax({
-            type: "post",
-            url: "/member/check",
-            data: {"memberId": memberId},
-            dataType: "text",
-            success: function (data) {
-                if(memberId == ""){
-                    r.innerHTML = "아이디를 입력해주세요.";
-                    r.style.color = "red";
-                }else if(data == "ok") {
-                    r.innerHTML= "";
-                }else {
-                    r.innerHTML = "중복된 아이디 입니다.";
-                    r.style.color = "red";
-                }
-            },
-            error: function (){
-                alert("에러")
-            }
-        });
-    }
     const pCheck = () => {
         const mPass = document.getElementById("memberPassword").value;
         const r1 = document.getElementById("r1");
@@ -270,23 +245,14 @@
         }
     }
     const click1 = () => {
-        const memberId = document.getElementById("memberId").value;
-        $.ajax({
-            type: "post",
-            url: "/member/check",
-            data: {"memberId": memberId},
-            dataType: "text",
-            success: function (data) {
-                if(data == "ok" && pCheck() == true && pCheck2() == true && name1() == true && email1() == true && phone1() == true && local() ==true) {
-                    saveForm.submit();
-                }else {
-                    alert("모든 항목이 필수 입력입니다.");
-                }
-            },
-            error: function (){
-                alert("에러")
-            }
-        });
+        if(pCheck() == true && pCheck2() == true && name1() == true && email1() == true && phone1() == true && local() ==true) {
+            updateForm.submit();
+        }else {
+            alert("모든 항목이 필수 입력입니다.");
+        }
+    }
+    const c = () => {
+        location.href = "/member/detail?id=${updateMember.id}";
     }
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
