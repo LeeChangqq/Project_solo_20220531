@@ -46,6 +46,7 @@ public class MemberController {
             return "member/login";
         } else {
             session.setAttribute("memberId",result);
+            session.setAttribute("member",result.getId());
             model.addAttribute("member", result);
             return "/index";
         }
@@ -57,7 +58,7 @@ public class MemberController {
     }
     @GetMapping("/update")
     public String updateForm(HttpSession session, Model model) {
-        Long updateId = (Long) session.getAttribute("memberId.id");
+        Long updateId = (Long) session.getAttribute("member");
         System.out.println("updateId = " + updateId);
         MemberDTO memberDTO = memberService.findById(updateId);
         model.addAttribute("updateMember", memberDTO);
@@ -66,6 +67,7 @@ public class MemberController {
     @PostMapping("/update")
     public String update(@ModelAttribute MemberDTO memberDTO){
         boolean result = memberService.update(memberDTO);
+        System.out.println("memberDTO = " + memberDTO);
         if(result) {
             // 해당 회원이 상세정보
             return "redirect:/member/detail?id=" + memberDTO.getId();
@@ -81,10 +83,11 @@ public class MemberController {
         return "member/list";
     }
     @GetMapping("/delete")
-    public String delete (@RequestParam("id") Long id) {
+    public String delete (@RequestParam("id") Long id, HttpSession session) {
         boolean result = memberService.delete(id);
         if(result) {
-            return "redirect:/member/findAll";
+            session.invalidate();
+            return "index";
         }else {
             return "delete-fail";
         }
@@ -102,5 +105,11 @@ public class MemberController {
         model.addAttribute("member", memberList);
         model.addAttribute("paging", paging);
         return "index";
+    }
+    @GetMapping("/check")
+    public String check(@RequestParam Long id, Model model) {
+        MemberDTO memberDTO = memberService.findById(id);
+        model.addAttribute("member",memberDTO);
+        return "member/check";
     }
 }

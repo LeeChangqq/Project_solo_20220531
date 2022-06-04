@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'EliceDigitalBaeum-Bd';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_elice@1.0/EliceDigitalBaeum-Bd.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: EliceDigitalBaeum-Bd;
+}
+
+body {
+    margin: 20px 30px;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    color: #222;
+}
+
+.header-title {
+    margin-top: 20px;
+}
+
+.header-title a {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.header-container {
+    display: flex;
+    height: 100px;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #222;
+    margin-bottom: 40px;
+}
+
+.link-list-container {
+    margin-top: 38px;
+    margin-left: auto;
+    display: flex;
+}
+
+.login-form-container,
+.logout-container,
+.symbol-container {
+    margin-right: 20px;
+}
+
+.symbol-container a {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.symbol-container {
+    margin-top: 2px;
+}

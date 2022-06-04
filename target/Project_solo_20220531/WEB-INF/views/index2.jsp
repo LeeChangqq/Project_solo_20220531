@@ -1,38 +1,30 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2022-06-02
-  Time: 오후 4:23
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
-<head>
-    <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-    <script src="/resources/js/jquery.js"></script>
+<%--&lt;%&ndash;--%>
+<%--  Created by IntelliJ IDEA.--%>
+<%--  User: user--%>
+<%--  Date: 2022-05-27--%>
+<%--  Time: 오후 6:10--%>
+<%--  To change this template use File | Settings | File Templates.--%>
+<%--&ndash;%&gt;--%>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
+<%--<html>--%>
+<%--<head>--%>
+<%--    <title>Title</title>--%>
+<%--    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">--%>
+<%--</head>--%>
+<%--<body>--%>
+<%--<div class="container mt-3">--%>
+<%--    <form action="/board/search" method="get">--%>
+<%--        <select name="searchType">--%>
+<%--            <option value="bTitle">제목</option>--%>
+<%--            <option value="bWriter">작성자</option>--%>
+<%--        </select>--%>
+<%--        <input type="text" name="q" placeholder="검색어 입력">--%>
+<%--        <input type="submit" value="검색">--%>
+<%--    </form>--%>
+<%--</div>--%>
 
-    <style>
-        .main-container {
-            width: 65%;
-            height: 400px;
-            border: 1px solid gray;
-            padding: 10px 30px;
-            margin-left: 18%;
-        }
-    </style>
-</head>
-<body>
-<jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
-    <a href="/member/save">회원가입</a>
-    <a href="/product/findAll">상품 리스트</a>
-    ${sessionScope.memberId.id}
-    ${sessionScope.memberId.memberId}
-    <div class="main-container">
-
-    </div>
 <%--<div class="container">--%>
 <%--    <table class="table">--%>
 <%--        <tr>--%>
@@ -46,7 +38,6 @@
 <%--            <tr>--%>
 <%--                <td>${member.id}</td>--%>
 <%--                <td>${member.memberId}</td>--%>
-<%--                <td>${member.memberName}</td>--%>
 <%--            </tr>--%>
 <%--        </c:forEach>--%>
 <%--    </table>--%>
@@ -96,5 +87,5 @@
 <%--        </c:choose>--%>
 <%--    </ul>--%>
 <%--</div>--%>
-</body>
-</html>
+<%--</body>--%>
+<%--</html>--%>

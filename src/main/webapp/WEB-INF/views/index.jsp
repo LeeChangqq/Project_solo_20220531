@@ -13,13 +13,26 @@
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
     <script src="/resources/js/jquery.js"></script>
+
+    <style>
+        .main-container {
+            width: 65%;
+            height: 400px;
+            border: 1px solid gray;
+            padding: 10px 30px;
+            margin-left: 18%;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
     <a href="/member/save">회원가입</a>
-
+    <a href="/product/findAll">상품 리스트</a>
     ${sessionScope.memberId.id}
     ${sessionScope.memberId.memberId}
+    <div class="main-container">
+
+    </div>
 <%--<div class="container">--%>
 <%--    <table class="table">--%>
 <%--        <tr>--%>
