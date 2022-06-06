@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -21,21 +22,30 @@
                         <a href="/">홈 화면</a>
                     </div>
                     <div class="link-list-container">
-                        <div class="login-form-container">
-                            <a href="/member/login-form">로그인</a>
-                        </div>
-                        <div class="symbol-container">
-                            <a>|</a>
-                        </div>
-                        <div class="logout-container">
-                            <a href="/member/logout">로그아웃</a>
-                        </div>
-                        <div class="symbol-container">
-                            <a>|</a>
-                        </div>
-                        <div class="detail-container">
-                            <a href="/member/detail?id=${sessionScope.memberId.id}">개인정보</a>
-                        </div>
+                        <c:choose>
+                            <c:when test="${sessionScope.member == null}">
+                                <div class="login-form-container">
+                                    <a href="/member/save">회원가입</a>
+                                </div>
+                                <div class="symbol-container">
+                                    <a>|</a>
+                                </div>
+                                <div class="login-form-container">
+                                    <a href="/member/login-form">로그인</a>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="logout-container">
+                                    <a href="/member/logout">로그아웃</a>
+                                </div>
+                                    <div class="symbol-container">
+                                    <a>|</a>
+                                </div>
+                                <div class="detail-container">
+                                    <a href="/member/detail?id=${sessionScope.memberId.id}">개인정보</a>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </header>

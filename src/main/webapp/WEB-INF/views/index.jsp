@@ -12,13 +12,14 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-    <script src="/resources/js/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
     <style>
         .main-container {
             width: 65%;
-            height: 400px;
-            border: 1px solid gray;
+            /*height: 400px;*/
+            /*border: 1px solid gray;*/
             padding: 10px 30px;
             margin-left: 18%;
         }
@@ -28,11 +29,26 @@
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
     <a href="/member/save">회원가입</a>
     <a href="/product/findAll">상품 리스트</a>
+    <a href="/product/saveFile">상품 등록</a>
+<%--    <a href="/product/detail?id=7">상품 테스트</a>--%>
     ${sessionScope.memberId.id}
     ${sessionScope.memberId.memberId}
-    <div class="main-container">
-
-    </div>
+    <table>
+        <div class="main-container">
+<%--        <img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="" height="100" width="100">--%>
+<%--        ${product.productName}--%>
+            <c:forEach var="p" items="${product}">
+                <tr>
+                    <img src="${pageContext.request.contextPath}/upload/${p.productProfile}" alt="" height="100" width="100">
+                </tr>
+                <c:choose>
+                    <c:when test="${p.id == 4}">
+                        <th>
+                    </c:when>
+                </c:choose>
+            </c:forEach>
+        </div>
+    </table>
 <%--<div class="container">--%>
 <%--    <table class="table">--%>
 <%--        <tr>--%>
