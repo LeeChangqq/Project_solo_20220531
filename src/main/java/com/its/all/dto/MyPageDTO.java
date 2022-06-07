@@ -3,7 +3,7 @@ package com.its.all.dto;
 import lombok.Data;
 
 @Data
-public class MyPage {
+public class MyPageDTO {
     private Long id;
     private Long memberId;
     private Long productId;

@@ -12,14 +12,130 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-    <script src="/resources/js/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <style>
+        .main-container {
+            width: 72%;
+            /*height: 400px;*/
+            /*border: 1px solid gray;*/
+            padding: 10px 30px;
+            margin-left: 14%;
+        }
+        .span-container {
+            padding-bottom: 50px;
+        }
+        .file-container {
+            margin-left: 6%;
+            margin-bottom: 5%;
+        }
+
+        .ul-container li {
+            display: block;
+            float: left;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ul-container li figure {
+            position: relative;
+            margin-left: 100px;
+            margin-bottom: 80px;
+        }
+
+        .ul-container li figure img {
+            display: block;
+        }
+
+        .cart {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
-    <a href="/member/save">회원가입</a>
+<a href="/member/save">회원가입</a>
+<a href="/product/findAll">상품 리스트</a>
+<a href="/product/saveFile">상품 등록</a>
+<%--    <a href="/product/detail?id=7">상품 테스트</a>--%>
+${sessionScope.memberId.id}
+${sessionScope.memberId.memberId}
+<%--    <div class="main-container">--%>
+<%--        &lt;%&ndash;        <img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="" height="100" width="100">&ndash;%&gt;--%>
+<%--        &lt;%&ndash;        ${product.productName}&ndash;%&gt;--%>
+<%--            <c:forEach var="p" items="${product}">--%>
+<%--                    <img src="${pageContext.request.contextPath}/upload/${p.productProfile}" alt="" height="200" width="200" class="file-container">--%>
+<%--                        <a>${p.productName}</a>--%>
+<%--                        --%>
+<%--            </c:forEach>--%>
+<%--    </div>--%>
 
-    ${sessionScope.memberId.id}
-    ${sessionScope.memberId.memberId}
+
+<%--<div class="tab-content">--%>
+<%--    <div class="tab-pane fade in active" id="popular">--%>
+
+<%--        <ul class="aa-product-catg aa-popular-slider">--%>
+<%--            <c:forEach items="${product}" var="p">--%>
+<%--            <li>--%>
+<%--                <figure>--%>
+<%--                    <a class="aa-product-img" href="#"><img src="${pageContext.request.contextPath}/upload/${p.productProfile}" alt="신상품 이미지" width="200" height="200"></a>--%>
+<%--                    <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>장바구니에 담기</a>--%>
+<%--                    <figcaption>--%>
+<%--                        <h4 class="aa-product-title"><a href="#">${p.productName}</a></h4>--%>
+<%--                        <span class="aa-product-price"><fmt:formatNumber pattern="#,### 원" value="${p.productPrice}"/></span>--%>
+<%--                    </figcaption>--%>
+<%--                </figure>--%>
+<%--            </li>--%>
+<%--            </c:forEach>--%>
+<%--        </ul>--%>
+<%--    </div>--%>
+<%--</div>--%>
+
+
+<div class="main-container">
+    <ul class="ul-container">
+        <c:forEach items="${product}" var="p">
+            <li>
+                <figure>
+                    <a href="#"><img src="${pageContext.request.contextPath}/upload/${p.productProfile}" alt="신상품 이미지" width="200" height="200"></a>
+                    <figcaption>
+                        <h4><a href="#">${p.productName}</a></h4>
+                        <span>${p.productPrice}</span>
+                        <a href="/myPage/save" class="cart"><span>장바구니</span></a>
+                        <c:choose>
+                            <c:when test="${sessionScope.memberId.memberId == 'admin'}">
+                                <a href="/product/delete?id=${p.id}">상품 삭제</a>
+                            </c:when>
+                        </c:choose>
+                    </figcaption>
+                </figure>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
+
+
+<%--<br />--%>
+<%--    <c:forEach var="i" items="${product}" begin="0" end="3" step="1">--%>
+<%--        <img src="${pageContext.request.contextPath}/upload/${i.productProfile}" alt="" height="200" width="200" class="file-container">--%>
+<%--    </c:forEach>--%>
+<%--<br />--%>
+<%--<div class="container234">--%>
+<%--    <c:forEach var="i" items="${product}" begin="0" end="3" step="1">--%>
+<%--        <a class="text234">${i.productName}</a>--%>
+<%--    </c:forEach>--%>
+<%--</div>--%>
+<%--<br />--%>
+<%--    <c:forEach var="i" items="${product}" begin="4" end="7" step="1">--%>
+<%--        <img src="${pageContext.request.contextPath}/upload/${i.productProfile}" alt="" height="200" width="200" class="file-container">--%>
+<%--    </c:forEach>--%>
+<%--<div class="container234">--%>
+<%--    <c:forEach var="i" items="${product}" begin="4" end="7" step="1">--%>
+<%--        <a class="text234">${i.productName}</a>--%>
+<%--    </c:forEach>--%>
+<%--</div>--%>
+
 <%--<div class="container">--%>
 <%--    <table class="table">--%>
 <%--        <tr>--%>

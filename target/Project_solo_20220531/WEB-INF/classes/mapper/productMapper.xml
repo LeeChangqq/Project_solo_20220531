@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Product">
+    <!--    <insert id="save" parameterType="board">-->
+    <!--        insert into b_table(mId, bTitle, bWriter, bDate, bContents) values (#{mId}, #{bTitle},#{bWriter}, now(), #{bContents})-->
+    <!--    </insert>-->
+    <select id="findAll" parameterType="product" resultType="product">
+        select * from product_table
+    </select>
+    <insert id="saveFile" parameterType="product">
+        insert into product_table(productName, productContents, productProfile, productPrice, productQuantity) values (#{productName},#{productContents},#{productProfile},#{productPrice}, #{productQuantity})
+    </insert>
+    <delete id="delete" parameterType="Long">
+        delete from product_table where id= #{id}
+    </delete>
+    <!--    <select id="count" resultType="int">-->
+    <!--        select count(id) from b_table-->
+    <!--    </select>-->
+    <!--    <select id="pagingList" parameterType="java.util.HashMap" resultType="board">-->
+    <!--        select * from b_table order by id desc limit #{start}, #{limit}-->
+    <!--    </select>-->
+    <select id="findById" resultType="product" parameterType="Long">
+        select * from product_table where id=#{id}
+    </select>
+    <!--    <update id="hits" parameterType="Long">-->
+    <!--        update b_table set bHits=bHits+1 where id=#{id}-->
+    <!--    </update>-->
+    <!--    <delete id="delete" parameterType="board">-->
+    <!--        delete from b_table where id=#{id}-->
+    <!--    </delete>-->
+    <!--    <update id="update" parameterType="board">-->
+    <!--        update b_table set bTitle=#{bTitle}, bWriter=#{bWriter}, bContents=#{bContents} where id=#{id}-->
+    <!--    </update>-->
+    <!--    <select id="search" parameterType="java.util.HashMap" resultType="board">-->
+    <!--        select * from b_table where ${type} like concat('%', #{q}, '%') order by  id desc-->
+    <!--    </select>-->
+</mapper>

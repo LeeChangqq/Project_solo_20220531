@@ -1,6 +1,7 @@
 package com.its.all.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class ProductDTO {
@@ -10,4 +11,5 @@ public class ProductDTO {
     private String productProfile;
     private int productPrice;
     private int productQuantity;
+    private MultipartFile productFile;
 }
