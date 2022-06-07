@@ -22,7 +22,11 @@ public class ProductRepository {
     public ProductDTO findById(Long id) {
         return sql.selectOne("Product.findById", id);
     }
+<<<<<<< HEAD
     public int delete(Long id) {
         return sql.delete("Product.delete", id);
     }
 }
+=======
+}
+>>>>>>> origin/main

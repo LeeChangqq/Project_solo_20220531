@@ -11,8 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-<input type="text" name="memberPassword" id="memberPassword">
-<input type="button" onclick="check1()" value="탈퇴">
+    <input type="text" name="memberPassword" id="memberPassword">
+    <input type="button" onclick="check1()" value="탈퇴">
 </body>
 <script>
     const check1 = () => {
@@ -23,6 +23,7 @@
         }else {
             location.href = "/member/check?id=${member.id}";
         }
+
     }
 </script>
 </html>
