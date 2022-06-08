@@ -13,9 +13,12 @@
     <!--    <insert id="saveFile" parameterType="product">-->
     <!--        insert into product_table(productName, productContents, productProfile, productPrice, productQuantity) values (#{productName},#{productContents},#{productProfile},#{productPrice}, #{productQuantity})-->
     <!--    </insert>-->
-    <!--    <delete id="delete" parameterType="Long">-->
-    <!--        delete from product_table where id= #{id}-->
-    <!--    </delete>-->
+        <delete id="delete" parameterType="Long">
+            delete from myPage_table where id= #{id}
+        </delete>
+    <select id="check" parameterType="Long" resultType="Long">
+        select productId from myPage_table where productId=#{productId}
+    </select>
     <!--    <select id="count" resultType="int">-->
     <!--        select count(id) from b_table-->
     <!--    </select>-->

@@ -21,4 +21,10 @@ public class MyPageRepository {
     public MyPageDTO findById(Long id){
         return sql.selectOne("MyPage.findById",id);
     }
+    public int delete(Long id) {
+        return sql.delete("MyPage.delete", id);
+    }
+    public Long check(Long productId) {
+        return sql.selectOne("MyPage.check", productId);
+    }
 }

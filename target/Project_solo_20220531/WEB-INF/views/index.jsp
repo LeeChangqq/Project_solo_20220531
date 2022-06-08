@@ -94,10 +94,10 @@ ${sessionScope.memberId.memberId}
         <c:forEach items="${product}" var="p">
             <li>
                 <figure>
-                    <a href="#"><img src="${pageContext.request.contextPath}/upload/${p.productProfile}" alt="신상품 이미지" width="200" height="200"></a>
+                    <a href="/product/detail?id=${p.id}"><img src="${pageContext.request.contextPath}/upload/${p.productProfile}" alt="신상품 이미지" width="200" height="200"></a>
                     <figcaption>
-                        <h4><a href="#">${p.productName}</a></h4>
-                        <span>${p.productPrice}원</span>
+                        <h4><a href="/product/detail?id=${p.id}">${p.productName}</a></h4>
+                        <a href="/product/detail?id=${p.id}"><span>${p.productPrice}원</span></a>
                         <c:choose>
                             <c:when test="${sessionScope.member != null}">
                                 <a href="/myPage/save?memberId=${sessionScope.member}&productId=${p.id}" class="cart"><span>장바구니</span></a>
@@ -200,4 +200,27 @@ ${sessionScope.memberId.memberId}
 <%--    </ul>--%>
 <%--</div>--%>
 </body>
+
+
+<%--<script>--%>
+<%--    const idCheck = () => {--%>
+<%--        const productId = document.getElementById("productId").value;--%>
+<%--        $.ajax({--%>
+<%--            type: "post",--%>
+<%--            url: "/myPage/check",--%>
+<%--            data: {"productId": productId},--%>
+<%--            dataType: "text",--%>
+<%--            success: function (data) {--%>
+<%--                if(data == "ok") {--%>
+<%--                    location.href="/myPage/save?memberId=${sessionScope.member}&productId=${product.id}"--%>
+<%--                }else {--%>
+<%--                    alert("장바구니에 이미 있어")--%>
+<%--                }--%>
+<%--            },--%>
+<%--            error: function (){--%>
+<%--                alert("에러")--%>
+<%--            }--%>
+<%--        });--%>
+<%--    }--%>
+<%--</script>--%>
 </html>

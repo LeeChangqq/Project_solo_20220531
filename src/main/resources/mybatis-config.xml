@@ -6,7 +6,7 @@
         <typeAlias type="com.its.all.dto.MemberDTO" alias="member"></typeAlias>
         <typeAlias type="com.its.all.dto.ProductDTO" alias="product"></typeAlias>
         <typeAlias type="com.its.all.dto.MyPageDTO" alias="myPage"></typeAlias>
-
+        <typeAlias type="com.its.all.dto.ImageDTO" alias="image"></typeAlias>
         <!--        <typeAlias type="com.its.all.dto.CommentDTO" alias="comment"></typeAlias>-->
     </typeAliases>
 </configuration>

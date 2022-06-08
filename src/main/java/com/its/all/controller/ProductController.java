@@ -1,6 +1,5 @@
 package com.its.all.controller;
 
-import com.its.all.dto.MemberDTO;
 import com.its.all.dto.ProductDTO;
 import com.its.all.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +62,6 @@ public class ProductController {
     public String findById(@RequestParam("id") Long id, Model model){
         ProductDTO productDTO = productService.findById(id);
         model.addAttribute("product", productDTO);
-        return "index";
+        return "product/detail";
     }
 }

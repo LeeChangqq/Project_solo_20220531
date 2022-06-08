@@ -23,4 +23,20 @@ public class MyPageService {
     public List<MyPageDTO> findAll() {
         return myPageRepository.findAll();
     }
+    public boolean delete(Long id) {
+        int result = myPageRepository.delete(id);
+        if (result > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public String check(Long productId) {
+        Long product = myPageRepository.check(productId);
+        if (product == null) {
+            return "ok";
+        } else {
+            return "no";
+        }
+    }
 }

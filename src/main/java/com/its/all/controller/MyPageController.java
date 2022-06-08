@@ -37,8 +37,18 @@ public class MyPageController {
         model.addAttribute("product", productDTO);
         return "myPage/list";
     }
-//    @GetMapping("/delete")
-//    public String delete() {
-//
-//    }
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id) {
+        boolean result = myPageService.delete(id);
+        if (result) {
+            return "redirect:/myPage/findAll";
+        } else {
+            return "delete-fail";
+        }
+    }
+    @PostMapping("/check")
+    public @ResponseBody String check(@RequestParam("productId") Long productId) {
+        String check = myPageService.check(productId);
+        return check;
+    }
 }
