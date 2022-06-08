@@ -45,16 +45,24 @@ public class ProductController {
             return "delete-fail";
         }
     }
+    @GetMapping("/myPage")
+    public String myPage(@RequestParam("id") Long id, Model model) {
+        ProductDTO productDTO = productService.findById(id);
+        List<ProductDTO> productDTOList = productService.findAll();
+        model.addAttribute("productDTO", productDTO);
+        model.addAttribute("productList",productDTOList);
+        return "product/myPage";
+    }
 //    @GetMapping("/myPage")
 //    public String myPage(@RequestParam("id") Long id, Model model) {
 //        ProductDTO productDTO = productService.myPage(id);
 //        model.addAttribute("product", productDTO);
 //        return "myPage";
 //    }
-//    @GetMapping("/detail")
-//    public String findById(@RequestParam("id") Long id, Model model){
-//        ProductDTO productDTO = productService.findById(id);
-//        model.addAttribute("product", productDTO);
-//        return "index";
-//    }
+    @GetMapping("/detail")
+    public String findById(@RequestParam("id") Long id, Model model){
+        ProductDTO productDTO = productService.findById(id);
+        model.addAttribute("product", productDTO);
+        return "index";
+    }
 }

@@ -7,9 +7,9 @@
     <insert id="save" parameterType="myPage">
         insert into myPage_table(memberId, productId, myQuantity) values (#{memberId}, #{productId}, #{myQuantity})
     </insert>
-    <!--    <select id="findAll" parameterType="product" resultType="product">-->
-    <!--        select * from product_table-->
-    <!--    </select>-->
+        <select id="findAll" parameterType="myPage" resultType="myPage">
+            select * from myPage_table
+        </select>
     <!--    <insert id="saveFile" parameterType="product">-->
     <!--        insert into product_table(productName, productContents, productProfile, productPrice, productQuantity) values (#{productName},#{productContents},#{productProfile},#{productPrice}, #{productQuantity})-->
     <!--    </insert>-->

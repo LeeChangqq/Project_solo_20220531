@@ -97,8 +97,12 @@ ${sessionScope.memberId.memberId}
                     <a href="#"><img src="${pageContext.request.contextPath}/upload/${p.productProfile}" alt="신상품 이미지" width="200" height="200"></a>
                     <figcaption>
                         <h4><a href="#">${p.productName}</a></h4>
-                        <span>${p.productPrice}</span>
-                        <a href="/myPage/save" class="cart"><span>장바구니</span></a>
+                        <span>${p.productPrice}원</span>
+                        <c:choose>
+                            <c:when test="${sessionScope.member != null}">
+                                <a href="/myPage/save?memberId=${sessionScope.member}&productId=${p.id}" class="cart"><span>장바구니</span></a>
+                            </c:when>
+                        </c:choose>
                         <c:choose>
                             <c:when test="${sessionScope.memberId.memberId == 'admin'}">
                                 <a href="/product/delete?id=${p.id}">상품 삭제</a>

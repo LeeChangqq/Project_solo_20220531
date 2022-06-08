@@ -41,14 +41,14 @@
                     <div class="symbol-container">
                         <a>|</a>
                     </div>
-                    <div class="detail-container">
+                    <div class="logout-container">
                         <a href="/member/detail?id=${sessionScope.memberId.id}">개인정보</a>
                     </div>
                     <div class="symbol-container">
                         <a>|</a>
                     </div>
-                    <div class="detail-container">
-                        <a href="/myPage/detail?id=${sessionScope.memberId.id}">장바구니</a>
+                    <div class="logout-container">
+                        <a href="/myPage/findAll?id=${sessionScope.member}">장바구니</a>
                     </div>
                 </c:otherwise>
             </c:choose>
