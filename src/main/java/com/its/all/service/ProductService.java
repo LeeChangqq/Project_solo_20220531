@@ -35,7 +35,6 @@ public class ProductService {
     public ProductDTO findById(Long id) {
         return productRepository.findById(id);
     }
-<<<<<<< HEAD
     public boolean delete(Long id) {
         int result = productRepository.delete(id);
         if (result > 0) {
@@ -48,6 +47,4 @@ public class ProductService {
 //    public ProductDTO myPage(Long id) {
 //        return productRepository.myPage(id);
 //    }
-=======
->>>>>>> origin/main
 }

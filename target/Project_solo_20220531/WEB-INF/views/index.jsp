@@ -30,24 +30,20 @@
             margin-left: 6%;
             margin-bottom: 5%;
         }
-
         .ul-container li {
             display: block;
             float: left;
             overflow: hidden;
             position: relative;
         }
-
         .ul-container li figure {
             position: relative;
             margin-left: 100px;
             margin-bottom: 80px;
         }
-
         .ul-container li figure img {
             display: block;
         }
-
         .cart {
             display: block;
         }

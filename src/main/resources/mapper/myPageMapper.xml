@@ -4,18 +4,18 @@
 
 
 <mapper namespace="MyPage">
-        <insert id="save" parameterType="myPage">
-            insert into myPage_table(memberId, productId, myQuantity) values (#{memberId}, #{productId}, #{myQuantity})
-        </insert>
-<!--    <select id="findAll" parameterType="product" resultType="product">-->
-<!--        select * from product_table-->
-<!--    </select>-->
-<!--    <insert id="saveFile" parameterType="product">-->
-<!--        insert into product_table(productName, productContents, productProfile, productPrice, productQuantity) values (#{productName},#{productContents},#{productProfile},#{productPrice}, #{productQuantity})-->
-<!--    </insert>-->
-<!--    <delete id="delete" parameterType="Long">-->
-<!--        delete from product_table where id= #{id}-->
-<!--    </delete>-->
+    <insert id="save" parameterType="myPage">
+        insert into myPage_table(memberId, productId, myQuantity) values (#{memberId}, #{productId}, #{myQuantity})
+    </insert>
+    <!--    <select id="findAll" parameterType="product" resultType="product">-->
+    <!--        select * from product_table-->
+    <!--    </select>-->
+    <!--    <insert id="saveFile" parameterType="product">-->
+    <!--        insert into product_table(productName, productContents, productProfile, productPrice, productQuantity) values (#{productName},#{productContents},#{productProfile},#{productPrice}, #{productQuantity})-->
+    <!--    </insert>-->
+    <!--    <delete id="delete" parameterType="Long">-->
+    <!--        delete from product_table where id= #{id}-->
+    <!--    </delete>-->
     <!--    <select id="count" resultType="int">-->
     <!--        select count(id) from b_table-->
     <!--    </select>-->
