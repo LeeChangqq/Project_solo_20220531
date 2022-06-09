@@ -1,7 +1,9 @@
 package com.its.all.controller;
 
+import com.its.all.dto.CommentDTO;
 import com.its.all.dto.ImageDTO;
 import com.its.all.dto.ProductDTO;
+import com.its.all.service.CommentService;
 import com.its.all.service.ImageService;
 import com.its.all.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class ProductController {
     ProductService productService;
     @Autowired
     ImageService imageService;
+    @Autowired
+    CommentService commentService;
 
     @GetMapping("/findAll")
     public String findAll(Model model) {
@@ -39,10 +43,9 @@ public class ProductController {
         return "redirect:/";
     }
     @GetMapping("/delete")
-    public String delete(@RequestParam("id") Long id, HttpSession session) {
+    public String delete(@RequestParam("id") Long id) {
         boolean result = productService.delete(id);
         if (result) {
-            session.invalidate();
             return "redirect:/";
         } else {
             return "delete-fail";
@@ -68,8 +71,10 @@ public class ProductController {
         model.addAttribute("product", productDTO);
         List<ProductDTO> productDTOList = productService.findAll();
         List<ImageDTO> imageList = imageService.findAll();
+        List<CommentDTO> commentList = commentService.findAll(id);
         model.addAttribute("image", imageList);
         model.addAttribute("productList",productDTOList);
+        model.addAttribute("commentList",commentList);
         return "product/detail";
     }
 }

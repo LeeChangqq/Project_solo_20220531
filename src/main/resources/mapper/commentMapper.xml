@@ -4,12 +4,21 @@
 
 
 <mapper namespace="Comment">
-        <insert id="save" parameterType="comment">
-            insert into comment_table(memberId, commentContents, commentWriter, commentDate, productId) values (#{memberId},#{commentContents}, #{commentWriter}, now(), #{productId})
-        </insert>
-        <select id="findAll" parameterType="Long" resultType="comment">
-            select * from comment_table where productId=#{productId} order by id desc
-        </select>
+    <insert id="save" parameterType="comment">
+        insert into comment_table(memberId, commentContents, commentWriter, commentDate, productId) values (#{memberId},#{commentContents}, #{commentWriter}, now(), #{productId})
+    </insert>
+    <select id="findAll" parameterType="Long" resultType="comment">
+        select * from comment_table where productId=#{productId} order by id desc
+    </select>
+    <delete id="delete" parameterType="Long">
+        delete from comment_table where id= #{id}
+    </delete>
+    <update id="update" parameterType="comment">
+        update comment_table set commentContents=#{commentContents}, commentDate=now() where id=#{id}
+    </update>
+    <select id="findById" resultType="comment" parameterType="Long">
+        select * from comment_table where id=#{id}
+    </select>
 </mapper>
 
 
