@@ -105,7 +105,8 @@ ${sessionScope.memberId.memberId}
                         </c:choose>
                         <c:choose>
                             <c:when test="${sessionScope.memberId.memberId == 'admin'}">
-                                <a href="/product/delete?id=${p.id}">상품 삭제</a>
+                                <a href="/product/delete?id=${p.id}">상품 삭제</a><br>
+                                <a href="/image/saveFile?id=${p.id}">상세페이지이미지</a>
                             </c:when>
                         </c:choose>
                     </figcaption>

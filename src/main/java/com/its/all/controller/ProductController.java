@@ -1,6 +1,8 @@
 package com.its.all.controller;
 
+import com.its.all.dto.ImageDTO;
 import com.its.all.dto.ProductDTO;
+import com.its.all.service.ImageService;
 import com.its.all.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,11 +13,13 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@RequestMapping("product")
+@RequestMapping("/product")
 @Controller
 public class ProductController {
     @Autowired
     ProductService productService;
+    @Autowired
+    ImageService imageService;
 
     @GetMapping("/findAll")
     public String findAll(Model model) {
@@ -62,6 +66,10 @@ public class ProductController {
     public String findById(@RequestParam("id") Long id, Model model){
         ProductDTO productDTO = productService.findById(id);
         model.addAttribute("product", productDTO);
+        List<ProductDTO> productDTOList = productService.findAll();
+        List<ImageDTO> imageList = imageService.findAll();
+        model.addAttribute("image", imageList);
+        model.addAttribute("productList",productDTOList);
         return "product/detail";
     }
 }

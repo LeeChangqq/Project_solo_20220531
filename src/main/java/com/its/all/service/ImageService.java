@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class ImageService {
@@ -24,5 +25,17 @@ public class ImageService {
             imageFile.transferTo(new File(savePath));
         }
         imageRepository.saveFile(imageDTO); // 6.
+    }
+
+    public List<ImageDTO> findAll() {
+        return imageRepository.findAll();
+    }
+    public boolean delete(Long id) {
+        int result = imageRepository.delete(id);
+        if (result > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
