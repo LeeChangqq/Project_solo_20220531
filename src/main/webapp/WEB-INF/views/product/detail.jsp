@@ -48,10 +48,10 @@
                     <tr>
                         <td>${comment.id}</td>
                         <td>${comment.commentWriter}</td>
-                        <td>${comment.commentContents}</td>
+                        <td id="contents${comment.id}">${comment.commentContents}</td>
                         <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${comment.commentDate}"></fmt:formatDate></td>
                         <td><a href="/comment/delete?id=${comment.id}&productId=${product.id}">삭제</a></td>
-                        <td><a href="javascript:aaa3()?id=${comment.id};">수정</a></td>
+                        <td id="updateBTN${comment.id}"><a href="javascript:void(0)" onclick="aaa3(${comment.id})">수정</a></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -82,8 +82,8 @@
                     output += "<td>"+result[i].commentWriter+"</td>";
                     output += "<td>"+result[i].commentContents+"</td>";
                     output += "<td>"+moment(result[i].commentDate).format("YYYY-MM-DD HH:mm:ss")+"</td>";
+                    output += "<td>" + "<a href='/comment/delete?productId=" + productId + "&id=" + result[i].id + "'>" + a + "</a>"+"</td>";
                     output += "<td>" + "<a href='javascript:aaa3();'>" + "수정" + "</a>"+"</td>";
-                    output += "<td>" + "<a href='/comment/update?productId=" + productId + "&id=" + result[i].id + "'>" + a + "</a>"+"</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
@@ -95,38 +95,66 @@
             }
         });
     })
-      const aaa3 = () => {
-        const commentWriter = document.getElementById("commentWriter").value;
-        const commentContents = $("#commentContents").val();
+
+      const aaa3 = (id) => {
+        const commentContents = document.getElementById("contents" + id).innerHTML;
+        console.log(commentContents);
+
+        const inputContents = document.getElementById("contents" + id);
+        inputContents.innerHTML = "<input id='updateContents' type='text' name='commentContents' value='" + commentContents + "'>";
+
+        const updateForm = document.getElementById("updateBTN" + id);
+        updateForm.innerHTML = "<a href='javascript:void(0)' onclick='updateComment(" + id + ")'> 수정한다 </a>";
+
+
         const productId = '${product.id}';
-        const memberId = '${sessionScope.member}';
+        // $.ajax({
+        //     type: "post",
+        //     url: "/comment/update",
+        //     data: {"commentWriter":commentWriter,"commentContents":commentContents,"productId":productId,"memberId":memberId},
+        //     dataType: "json",
+        //     success: function(result){
+        //         const a = "삭제";
+        //         let output = "<table class='table'>";
+        //         output += "<tr><th>댓글번호</th>";
+        //         output += "<th>작성자</th>";
+        //         output += "<th>내용</th>";
+        //         output += "<th>작성시간</th></tr>";
+        //         for(let i in result){
+        //             output += "<tr>";
+        //             output += "<td>"+result[i].id+"</td>";
+        //             output += "<td>"+result[i].commentWriter+"</td>";
+        //             output += "<td>"+moment(result[i].commentDate).format("YYYY-MM-DD HH:mm:ss")+"</td>";
+        //             output += "<td>" + "<a href='/comment/delete?productId=" + productId + "&id=" + result[i].id + "'>" + a + "</a>"+"</td>";
+        //             output += "<td>" + "<input type='text' name='" + commentContents + "'" + "value='" + result[i].commentContents + "'>" + "<a href='javascript:aaa3();'>" + "수정" + "</a>" + "</td>";
+        //             output += "</tr>";
+        //         }
+        //         output += "</table>";
+        //         document.getElementById('comment-list').innerHTML = output;
+        //         document.getElementById('commentContents').value='';
+        //     },
+        //     error: function () {
+        //         alert("틀림");
+        //     }
+        // });
+    }
+
+    const updateComment = (id) => {
+        const updateCommentContents = document.getElementById("updateContents").value;
+        console.log(updateCommentContents);
+
+        const productId = '${product.id}';
         $.ajax({
-            type: "post",
-            url: "/comment/update",
-            data: {"commentWriter":commentWriter,"commentContents":commentContents,"productId":productId,"memberId":memberId},
-            dataType: "json",
-            success: function(result){
-                const a = "삭제";
-                let output = "<table class='table'>";
-                output += "<tr><th>댓글번호</th>";
-                output += "<th>작성자</th>";
-                output += "<th>내용</th>";
-                output += "<th>작성시간</th></tr>";
-                for(let i in result){
-                    output += "<tr>";
-                    output += "<td>"+result[i].id+"</td>";
-                    output += "<td>"+result[i].commentWriter+"</td>";
-                    output += "<td>"+moment(result[i].commentDate).format("YYYY-MM-DD HH:mm:ss")+"</td>";
-                    output += "<td>" + "<a href='/comment/delete?productId=" + productId + "&id=" + result[i].id + "'>" + a + "</a>"+"</td>";
-                    output += "<td>" + "<input type='text' value='" + result[id].commentContents + "'>" + "<input type='submit'>" + "</td>";
-                    output += "</tr>";
-                }
-                output += "</table>";
-                document.getElementById('comment-list').innerHTML = output;
-                document.getElementById('commentContents').value='';
+           url: '/comment/update?id=' + id,
+           type: 'post',
+           data: {"id": id,
+                    "commentContents": updateCommentContents,
+                    "productId": productId},
+            success: function () {
+                location.href = '/product/detail?id=' + productId;
             },
-            error: function () {
-                alert("틀림");
+            err: function () {
+               alert('에러');
             }
         });
     }

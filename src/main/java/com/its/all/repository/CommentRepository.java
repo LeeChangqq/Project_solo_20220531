@@ -22,8 +22,8 @@ public class CommentRepository {
     public int delete(Long id) {
         return sql.delete("Comment.delete", id);
     }
-    public int update(CommentDTO commentDTO) {
-        return sql.update("Comment.update", commentDTO);
+    public void update(CommentDTO commentDTO) {
+        sql.update("Comment.update", commentDTO);
     }
     public CommentDTO findById(Long id) {
         return sql.selectOne("Comment.findById", id);

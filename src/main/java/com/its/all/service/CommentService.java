@@ -27,13 +27,8 @@ public class CommentService {
             return false;
         }
     }
-    public boolean update(CommentDTO commentDTO) {
-        int result = commentRepository.update(commentDTO);
-        if (result > 0) {
-            return true;
-        } else {
-            return false;
-        }
+    public void update(CommentDTO commentDTO) {
+        commentRepository.update(commentDTO);
     }
     public CommentDTO findById(Long id) {
         return commentRepository.findById(id);

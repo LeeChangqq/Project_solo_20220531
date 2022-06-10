@@ -46,14 +46,16 @@ public class CommentController {
 //    }
 
     @PostMapping("/update")
-    public @ResponseBody List<CommentDTO> update(@ModelAttribute CommentDTO commentDTO) {
-        List<CommentDTO> commentDTOList = commentService.findAll(commentDTO.getProductId());
-        return commentDTOList;
+    public void updateForm(@ModelAttribute CommentDTO commentDTO) {
+        System.out.println("CommentController.updateForm");
+        System.out.println(commentDTO);
+        commentService.update(commentDTO);
     }
+
     @GetMapping("/detail")
     public String findById(@RequestParam("id") Long id, Model model) {
         CommentDTO commentDTO = commentService.findById(id);
         model.addAttribute("comment", commentDTO);
-        return "member/detail";
+        return "redirect:product/detail";
     }
 }
