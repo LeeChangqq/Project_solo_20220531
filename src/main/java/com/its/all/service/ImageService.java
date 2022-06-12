@@ -19,7 +19,7 @@ public class ImageService {
         String imageFileName = imageFile.getOriginalFilename(); // 2.
         imageFileName = System.currentTimeMillis() + "-" + imageFileName; // 2.1
         imageDTO.setImage(imageFileName); // 3.
-        String savePath = "D:\\spring_img\\" + imageFileName; // 4.
+        String savePath = "C:\\spring_img\\" + imageFileName; // 4.
         // 5.
         if(!imageFile.isEmpty()){
             imageFile.transferTo(new File(savePath));

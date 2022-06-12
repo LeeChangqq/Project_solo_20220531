@@ -31,8 +31,9 @@ public class MyPageService {
             return false;
         }
     }
-    public String check(Long productId) {
-        Long product = myPageRepository.check(productId);
+    public String check(MyPageDTO myPageDTO) {
+        MyPageDTO product = myPageRepository.check(myPageDTO);
+        System.out.println(myPageDTO);
         if (product == null) {
             return "ok";
         } else {

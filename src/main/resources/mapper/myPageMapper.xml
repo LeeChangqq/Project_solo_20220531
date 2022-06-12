@@ -16,8 +16,8 @@
         <delete id="delete" parameterType="Long">
             delete from myPage_table where id= #{id}
         </delete>
-    <select id="check" parameterType="Long" resultType="Long">
-        select productId from myPage_table where productId=#{productId}
+    <select id="check" parameterType="myPage" resultType="myPage">
+        select * from myPage_table where productId=#{productId} and memberId=#{memberId}
     </select>
     <!--    <select id="count" resultType="int">-->
     <!--        select count(id) from b_table-->

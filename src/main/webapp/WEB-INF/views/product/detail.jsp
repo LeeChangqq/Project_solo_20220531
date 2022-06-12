@@ -64,6 +64,7 @@
         const commentContents = $("#commentContents").val();
         const productId = '${product.id}';
         const memberId = '${sessionScope.member}';
+        const member = '${sessionScope.memberId.memberId}';
         $.ajax({
             type: "post",
             url: "/comment/save",
@@ -80,10 +81,15 @@
                     output += "<tr>";
                     output += "<td>"+result[i].id+"</td>";
                     output += "<td>"+result[i].commentWriter+"</td>";
-                    output += "<td>"+result[i].commentContents+"</td>";
+                    output += "<td id='contents'" + result[i].id + ">" + result[i].commentContents+"</td>";
                     output += "<td>"+moment(result[i].commentDate).format("YYYY-MM-DD HH:mm:ss")+"</td>";
+                    if(member == result[i].commentWriter){
                     output += "<td>" + "<a href='/comment/delete?productId=" + productId + "&id=" + result[i].id + "'>" + a + "</a>"+"</td>";
                     output += "<td>" + "<a href='javascript:aaa3();'>" + "수정" + "</a>"+"</td>";
+                    }else {
+                        output += "<td></td>";
+                        output += "<td></td>";
+                    }
                     output += "</tr>";
                 }
                 output += "</table>";

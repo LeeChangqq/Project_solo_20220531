@@ -100,7 +100,7 @@ ${sessionScope.memberId.memberId}
                         <a href="/product/detail?id=${p.id}"><span>${p.productPrice}원</span></a>
                         <c:choose>
                             <c:when test="${sessionScope.member != null}">
-                                <a href="/myPage/save?memberId=${sessionScope.member}&productId=${p.id}" class="cart"><span>장바구니</span></a>
+                                <a href="javascript:void(0)" onclick="idCheck(${p.id})" class="cart"><span>장바구니</span></a>
                             </c:when>
                         </c:choose>
                         <c:choose>
@@ -201,27 +201,25 @@ ${sessionScope.memberId.memberId}
 <%--    </ul>--%>
 <%--</div>--%>
 </body>
-
-
-<%--<script>--%>
-<%--    const idCheck = () => {--%>
-<%--        const productId = document.getElementById("productId").value;--%>
-<%--        $.ajax({--%>
-<%--            type: "post",--%>
-<%--            url: "/myPage/check",--%>
-<%--            data: {"productId": productId},--%>
-<%--            dataType: "text",--%>
-<%--            success: function (data) {--%>
-<%--                if(data == "ok") {--%>
-<%--                    location.href="/myPage/save?memberId=${sessionScope.member}&productId=${product.id}"--%>
-<%--                }else {--%>
-<%--                    alert("장바구니에 이미 있어")--%>
-<%--                }--%>
-<%--            },--%>
-<%--            error: function (){--%>
-<%--                alert("에러")--%>
-<%--            }--%>
-<%--        });--%>
-<%--    }--%>
-<%--</script>--%>
+<script>
+    const idCheck = (id) => {
+        const member = '${sessionScope.member}';
+        $.ajax({
+            type: "post",
+            url: "/myPage/check",
+            data: {"productId": id, "memberId":member},
+            dataType: "text",
+            success: function (data) {
+                if(data == "ok") {
+                    location.href="/myPage/save?memberId=" + member + "&productId=" + id;
+                }else {
+                    alert("장바구니에 이미 있어")
+                }
+            },
+            error: function (){
+                alert("에러")
+            }
+        });
+    }
+</script>
 </html>
