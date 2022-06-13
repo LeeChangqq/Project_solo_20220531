@@ -1,6 +1,7 @@
 package com.its.all.service;
 
 import com.its.all.dto.CommentDTO;
+import com.its.all.dto.HitsDTO;
 import com.its.all.dto.MemberDTO;
 import com.its.all.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,23 @@ public class CommentService {
         commentRepository.update(commentDTO);
     }
     public CommentDTO findById(Long id) {
+        System.out.println(id);
         return commentRepository.findById(id);
     }
+
+    public int hits(HitsDTO hitsDTO) {
+        System.out.println(hitsDTO);
+        return commentRepository.hits(hitsDTO);
+    }
+    public String check(HitsDTO hitsDTO) {
+        HitsDTO result = commentRepository.check(hitsDTO);
+        if (result == null) {
+            return "ok";
+        } else {
+            return "no";
+        }
+    }
+//    public String updateHits(HitsDTO hitsDTO){
+//        return commentRepository.updateHits(hitsDTO);
+//    }
 }

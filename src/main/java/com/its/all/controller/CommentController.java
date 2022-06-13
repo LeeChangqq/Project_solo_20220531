@@ -1,9 +1,6 @@
 package com.its.all.controller;
 
-import com.its.all.dto.CommentDTO;
-import com.its.all.dto.ImageDTO;
-import com.its.all.dto.MemberDTO;
-import com.its.all.dto.ProductDTO;
+import com.its.all.dto.*;
 import com.its.all.service.CommentService;
 import com.its.all.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +53,29 @@ public class CommentController {
     public String findById(@RequestParam("id") Long id, Model model) {
         CommentDTO commentDTO = commentService.findById(id);
         model.addAttribute("comment", commentDTO);
-        return "redirect:product/detail";
+        return "redirect:/product/detail";
     }
+    @GetMapping("/hits")
+    public String hits(@ModelAttribute HitsDTO hitsDTO,@RequestParam("id") Long id,@RequestParam("productId") Long productId){
+        System.out.println(hitsDTO);
+        commentService.findById(id);
+        int result = commentService.hits(hitsDTO);
+        System.out.println(id);
+        if(result > 0){
+            return "redirect:/product/detail?id=" + productId;
+        }else {
+            return "/";
+        }
+    }
+    @PostMapping("/check")
+    public @ResponseBody String check(@ModelAttribute HitsDTO hitsDTO) {
+        System.out.println(hitsDTO);
+        String check = commentService.check(hitsDTO);
+        return check;
+    }
+//    @PostMapping("/updateHits")
+//    public @ResponseBody String updateHits(@ModelAttribute HitsDTO hitsDTO){
+//        String result = commentService.updateHits(hitsDTO);
+//        return result;
+//    }
 }

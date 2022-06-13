@@ -1,6 +1,7 @@
 package com.its.all.repository;
 
 import com.its.all.dto.CommentDTO;
+import com.its.all.dto.HitsDTO;
 import com.its.all.dto.MemberDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,25 @@ public class CommentRepository {
         sql.update("Comment.update", commentDTO);
     }
     public CommentDTO findById(Long id) {
+        sql.update("Comment.hits", id);
         return sql.selectOne("Comment.findById", id);
     }
+
+    public int hits(HitsDTO hitsDTO) {
+        System.out.println(hitsDTO);
+        return sql.insert("Hits.hits", hitsDTO);
+    }
+    public HitsDTO check(HitsDTO hitsDTO) {
+        return sql.selectOne("Hits.check", hitsDTO);
+    }
+
+//    public String updateHits(HitsDTO hitsDTO) {
+//        HitsDTO hitsDTO1 = sql.selectOne("Comment.duplicateCheck", hitsDTO);
+//        if (hitsDTO1 != null) {
+//            return "no";
+//        } else {
+//            sql.update("Comment.hits", hitsDTO.getCommentId());
+//            return "yes";
+//        }
+//    }
 }

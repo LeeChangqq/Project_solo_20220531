@@ -17,46 +17,74 @@
     <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 <body>
-    <jsp:include page="../../layout/header.jsp" flush="false"></jsp:include>
-    <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="신상품 이미지" width="200" height="200"></a><br>
-    <c:forEach items="${image}" var="image">
-            <c:choose>
-                <c:when test="${image.productId == product.id}">
-                    <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${image.image}" alt="신상품 이미지" width="200" height="200"></a>
-                    <a href="/image/delete?id=${image.id}&productId=${product.id}">삭제</a>
-                </c:when>
-            </c:choose>
-    </c:forEach>
-    <br>
-    <div class="container">
-        <div id="comment-write" class="input-group mb-3 form-floating">
-            <input type="text" id="commentWriter" class="form-control" value="${sessionScope.memberId.memberId}" readonly>
-            <label for="commentWriter">작성자</label>
-            <input type="text" id="commentContents" class="form-control" placeholder="내용">
-            <button id="comment-write-btn" class="btn btn-primary">댓글작성</button>
-        </div>
+<jsp:include page="../../layout/header.jsp" flush="false"></jsp:include>
+<a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="신상품 이미지" width="200" height="200"></a><br>
+<c:forEach items="${image}" var="image">
+    <c:choose>
+        <c:when test="${image.productId == product.id}">
+            <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${image.image}" alt="신상품 이미지" width="200" height="200"></a>
+            <a href="/image/delete?id=${image.id}&productId=${product.id}">삭제</a>
+        </c:when>
+    </c:choose>
+</c:forEach>
+<br>
+<div class="container">
+    <div id="comment-write" class="input-group mb-3 form-floating">
+        <input type="text" id="commentWriter" class="form-control" value="${sessionScope.memberId.memberId}" readonly>
+        <label for="commentWriter">작성자</label>
+        <input type="text" id="commentContents" class="form-control" placeholder="내용">
+        <button id="comment-write-btn" class="btn btn-primary">댓글작성</button>
+    </div>
 
-        <div id="comment-list">
-            <table class="table">
-                <tr>
-                    <th>댓글번호</th>
-                    <th>작성자</th>
-                    <th>내용</th>
-                    <th>작성시간</th>
-                </tr>
-                <c:forEach items="${commentList}" var="comment">
+    <div id="comment-list">
+        <table class="table">
+            <tr>
+                <th>댓글번호</th>
+                <th>작성자</th>
+                <th>내용</th>
+                <th>작성시간</th>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <c:forEach items="${commentList}" var="comment">
                     <tr>
                         <td>${comment.id}</td>
                         <td>${comment.commentWriter}</td>
                         <td id="contents${comment.id}">${comment.commentContents}</td>
                         <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${comment.commentDate}"></fmt:formatDate></td>
-                        <td><a href="/comment/delete?id=${comment.id}&productId=${product.id}">삭제</a></td>
-                        <td id="updateBTN${comment.id}"><a href="javascript:void(0)" onclick="aaa3(${comment.id})">수정</a></td>
+                        <c:choose>
+                            <c:when test="${sessionScope.memberId.memberId == comment.commentWriter && sessionScope.memberId.memberId != 'admin'}">
+                                <td><a href="/comment/delete?id=${comment.id}&productId=${product.id}">삭제</a></td>
+                            </c:when>
+                            <c:otherwise>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${sessionScope.memberId.memberId == 'admin'}">
+                                <td><a href="/comment/delete?id=${comment.id}&productId=${product.id}">삭제</a></td>
+                            </c:when>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${sessionScope.memberId.memberId == comment.commentWriter}">
+                                <td id="updateBTN${comment.id}"><a href="javascript:void(0)" onclick="aaa3(${comment.id})">수정</a></td>
+                                <td></td>
+                            </c:when>
+                            <c:when test="${sessionScope.memberId.memberId == 'admin'}">
+                                <td></td>
+                                <td></td>
+                            </c:when>
+                        </c:choose>
+                        <td><a href="javascript:void(0)" onclick="hitsCheck(${comment.id})">좋아요${comment.commentHits}</a></td>
+                        <td><a href="javascript:void(0)" onclick="hitsCheck2(${comment.id})">엄청 좋아요${comment.commentHits}</a></td>
                     </tr>
-                </c:forEach>
-            </table>
-        </div>
+            </c:forEach>
+        </table>
     </div>
+</div>
 </body>
 <script>
     $("#comment-write-btn").click(function () {
@@ -64,6 +92,7 @@
         const commentContents = $("#commentContents").val();
         const productId = '${product.id}';
         const memberId = '${sessionScope.member}';
+        const member = '${sessionScope.memberId.memberId}';
         $.ajax({
             type: "post",
             url: "/comment/save",
@@ -80,10 +109,18 @@
                     output += "<tr>";
                     output += "<td>"+result[i].id+"</td>";
                     output += "<td>"+result[i].commentWriter+"</td>";
-                    output += "<td>"+result[i].commentContents+"</td>";
+                    output += "<td id='contents'" + result[i].id + ">" + result[i].commentContents+"</td>";
                     output += "<td>"+moment(result[i].commentDate).format("YYYY-MM-DD HH:mm:ss")+"</td>";
-                    output += "<td>" + "<a href='/comment/delete?productId=" + productId + "&id=" + result[i].id + "'>" + a + "</a>"+"</td>";
-                    output += "<td>" + "<a href='javascript:aaa3();'>" + "수정" + "</a>"+"</td>";
+                    if(member == result[i].commentWriter){
+                        output += "<td>" + "<a href='/comment/delete?productId=" + productId + "&id=" + result[i].id + "'>" + a + "</a>"+"</td>";
+                        output += "<td>" + "<a href='javascript:aaa3();'>" + "수정" + "</a>"+"</td>";
+                    }else if(member == 'admin'){
+                        output += "<td>" + "<a href='/comment/delete?productId=" + productId + "&id=" + result[i].id + "'>" + a + "</a>"+"</td>";
+                        output += "<td></td>";
+                    }else{
+                        output += "<td></td>";
+                        output += "<td></td>";
+                    }
                     output += "</tr>";
                 }
                 output += "</table>";
@@ -95,18 +132,13 @@
             }
         });
     })
-
-      const aaa3 = (id) => {
+    const aaa3 = (id) => {
         const commentContents = document.getElementById("contents" + id).innerHTML;
         console.log(commentContents);
-
         const inputContents = document.getElementById("contents" + id);
         inputContents.innerHTML = "<input id='updateContents' type='text' name='commentContents' value='" + commentContents + "'>";
-
         const updateForm = document.getElementById("updateBTN" + id);
         updateForm.innerHTML = "<a href='javascript:void(0)' onclick='updateComment(" + id + ")'> 수정한다 </a>";
-
-
         const productId = '${product.id}';
         // $.ajax({
         //     type: "post",
@@ -138,23 +170,55 @@
         //     }
         // });
     }
-
     const updateComment = (id) => {
         const updateCommentContents = document.getElementById("updateContents").value;
         console.log(updateCommentContents);
-
         const productId = '${product.id}';
         $.ajax({
-           url: '/comment/update?id=' + id,
-           type: 'post',
-           data: {"id": id,
-                    "commentContents": updateCommentContents,
-                    "productId": productId},
+            url: '/comment/update?id=' + id,
+            type: 'post',
+            data: {"id": id,
+                "commentContents": updateCommentContents,
+                "productId": productId},
             success: function () {
                 location.href = '/product/detail?id=' + productId;
             },
             err: function () {
-               alert('에러');
+                alert('에러');
+            }
+        });
+    }
+</script>
+<script>
+    const hitsCheck = (id) => {
+        const memberId = '${sessionScope.member}';
+        const productId = '${product.id}';
+        $.ajax({
+            type: "post",
+            url: "/comment/check",
+            data: {"memberId":memberId, "commentId": id},
+            dataType: "text",
+            success: function (data) {
+                if(data == "ok") {
+                    location.href='/comment/hits?memberId=' + memberId + "&commentId=" + id + "&id=" + id + "&productId=" + productId;
+                }else {
+                    location.href='/comment/hits2?memberId=' + memberId + "&commentId=" + id + "&id=" + id + "&productId=" + productId;
+                }
+            }
+        });
+    }
+</script>
+<script>
+    const hitsCheck2 = (id) => {
+        const memberId = '${sessionScope.member}';
+        const productId = '${product.id}';
+        $.ajax({
+            type: "post",
+            url: "/comment/check",
+            data: {"memberId":memberId, "commentId": id},
+            dataType: "text",
+            success: function () {
+                location.href='/comment/hits?memberId=' + memberId + "&commentId=" + id + "&id=" + id + "&productId=" + productId;
             }
         });
     }

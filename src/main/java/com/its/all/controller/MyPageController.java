@@ -47,8 +47,9 @@ public class MyPageController {
         }
     }
     @PostMapping("/check")
-    public @ResponseBody String check(@RequestParam("productId") Long productId) {
-        String check = myPageService.check(productId);
+    public @ResponseBody String check(@ModelAttribute MyPageDTO myPageDTO) {
+        String check = myPageService.check(myPageDTO);
+        System.out.println(myPageDTO);
         return check;
     }
 }

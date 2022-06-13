@@ -8,5 +8,6 @@
         <typeAlias type="com.its.all.dto.MyPageDTO" alias="myPage"></typeAlias>
         <typeAlias type="com.its.all.dto.ImageDTO" alias="image"></typeAlias>
         <typeAlias type="com.its.all.dto.CommentDTO" alias="comment"></typeAlias>
+        <typeAlias type="com.its.all.dto.HitsDTO" alias="hits"></typeAlias>
     </typeAliases>
 </configuration>
