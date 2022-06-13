@@ -19,6 +19,9 @@
     <select id="findById" resultType="comment" parameterType="Long">
         select * from comment_table where id=#{id}
     </select>
+    <update id="hits" parameterType="Long">
+        update comment_table set commentHits=commentHits+1 where id=#{id}
+    </update>
 </mapper>
 
 

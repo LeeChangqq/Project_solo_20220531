@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Hits">
+    <insert id="hits" parameterType="hits">
+        insert into hits_table(memberId, commentId, hits) values (#{memberId},#{commentId},hits+1)
+    </insert>
+    <select id="check" parameterType="hits" resultType="hits">
+        select * from hits_table where memberId=#{memberId} and commentId=#{commentId}
+    </select>
+    <select id="duplicateCheck" parameterType="hits" resultType="hits">
+        SELECT * FROM hits_table WHERE memberId = #{mebmerId} AND commentId = #{commentId}
+    </select>
+</mapper>
