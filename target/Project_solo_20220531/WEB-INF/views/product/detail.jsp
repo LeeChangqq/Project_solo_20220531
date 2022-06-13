@@ -48,39 +48,39 @@
                 <td></td>
             </tr>
             <c:forEach items="${commentList}" var="comment">
-                    <tr>
-                        <td>${comment.id}</td>
-                        <td>${comment.commentWriter}</td>
-                        <td id="contents${comment.id}">${comment.commentContents}</td>
-                        <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${comment.commentDate}"></fmt:formatDate></td>
-                        <c:choose>
-                            <c:when test="${sessionScope.memberId.memberId == comment.commentWriter && sessionScope.memberId.memberId != 'admin'}">
-                                <td><a href="/comment/delete?id=${comment.id}&productId=${product.id}">삭제</a></td>
-                            </c:when>
-                            <c:otherwise>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </c:otherwise>
-                        </c:choose>
-                        <c:choose>
-                            <c:when test="${sessionScope.memberId.memberId == 'admin'}">
-                                <td><a href="/comment/delete?id=${comment.id}&productId=${product.id}">삭제</a></td>
-                            </c:when>
-                        </c:choose>
-                        <c:choose>
-                            <c:when test="${sessionScope.memberId.memberId == comment.commentWriter}">
-                                <td id="updateBTN${comment.id}"><a href="javascript:void(0)" onclick="aaa3(${comment.id})">수정</a></td>
-                                <td></td>
-                            </c:when>
-                            <c:when test="${sessionScope.memberId.memberId == 'admin'}">
-                                <td></td>
-                                <td></td>
-                            </c:when>
-                        </c:choose>
-                        <td><a href="javascript:void(0)" onclick="hitsCheck(${comment.id})">좋아요${comment.commentHits}</a></td>
-                        <td><a href="javascript:void(0)" onclick="hitsCheck2(${comment.id})">엄청 좋아요${comment.commentHits}</a></td>
-                    </tr>
+                <tr>
+                    <td>${comment.id}</td>
+                    <td>${comment.commentWriter}</td>
+                    <td id="contents${comment.id}">${comment.commentContents}</td>
+                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${comment.commentDate}"></fmt:formatDate></td>
+                    <c:choose>
+                        <c:when test="${sessionScope.memberId.memberId == comment.commentWriter && sessionScope.memberId.memberId != 'admin'}">
+                            <td><a href="/comment/delete?id=${comment.id}&productId=${product.id}">삭제</a></td>
+                        </c:when>
+                        <c:otherwise>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${sessionScope.memberId.memberId == 'admin'}">
+                            <td><a href="/comment/delete?id=${comment.id}&productId=${product.id}">삭제</a></td>
+                        </c:when>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${sessionScope.memberId.memberId == comment.commentWriter}">
+                            <td id="updateBTN${comment.id}"><a href="javascript:void(0)" onclick="aaa3(${comment.id})">수정</a></td>
+                            <td></td>
+                        </c:when>
+                        <c:when test="${sessionScope.memberId.memberId == 'admin'}">
+                            <td></td>
+                            <td></td>
+                        </c:when>
+                    </c:choose>
+                    <td><a href="javascript:void(0)" onclick="hitsCheck(${comment.id})">좋아요${comment.commentHits}</a></td>
+                    <td><a href="javascript:void(0)" onclick="hitsCheck2(${comment.id})">엄청 좋아요${comment.commentHits}</a></td>
+                </tr>
             </c:forEach>
         </table>
     </div>

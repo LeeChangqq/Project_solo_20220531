@@ -25,7 +25,7 @@ public class ProductService {
         String productFileName = productFile.getOriginalFilename(); // 2.
         productFileName = System.currentTimeMillis() + "-" + productFileName; // 2.1
         productDTO.setProductProfile(productFileName); // 3.
-        String savePath = "C:\\spring_img\\" + productFileName; // 4.
+        String savePath = "D:\\spring_img\\" + productFileName; // 4.
         // 5.
         if(!productFile.isEmpty()){
             productFile.transferTo(new File(savePath));
