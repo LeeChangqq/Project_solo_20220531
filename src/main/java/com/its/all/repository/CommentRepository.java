@@ -38,6 +38,14 @@ public class CommentRepository {
     public HitsDTO check(HitsDTO hitsDTO) {
         return sql.selectOne("Hits.check", hitsDTO);
     }
+    public CommentDTO findById2(Long id) {
+        sql.update("Comment.hits2", id);
+        return sql.selectOne("Comment.findById2", id);
+    }
+
+    public void hitsDelete(Long id) {
+        sql.delete("Hits.delete", id);
+    }
 
 //    public String updateHits(HitsDTO hitsDTO) {
 //        HitsDTO hitsDTO1 = sql.selectOne("Comment.duplicateCheck", hitsDTO);
@@ -48,4 +56,5 @@ public class CommentRepository {
 //            return "yes";
 //        }
 //    }
+
 }

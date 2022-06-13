@@ -73,6 +73,12 @@ public class CommentController {
         String check = commentService.check(hitsDTO);
         return check;
     }
+    @GetMapping("/hits2")
+    public String hits2(@ModelAttribute HitsDTO hitsDTO, @RequestParam("id") Long id, @RequestParam("productId") Long productId) {
+        commentService.findById2(id);
+        commentService.hitsDelete(hitsDTO.getId());
+        return "redirect:/product/detail?id=" + productId;
+    }
 //    @PostMapping("/updateHits")
 //    public @ResponseBody String updateHits(@ModelAttribute HitsDTO hitsDTO){
 //        String result = commentService.updateHits(hitsDTO);

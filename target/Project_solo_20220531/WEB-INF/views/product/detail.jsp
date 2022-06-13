@@ -202,25 +202,26 @@
                 if(data == "ok") {
                     location.href='/comment/hits?memberId=' + memberId + "&commentId=" + id + "&id=" + id + "&productId=" + productId;
                 }else {
-                    alert("dd")
+                    // alert("dd")
+                    location.href='/comment/hits2?memberId=' + memberId + "&commentId=" + id + "&id=" + id + "&productId=" + productId;
                 }
             }
         });
     }
 </script>
-<script>
-    const hitsCheck2 = (id) => {
-        const memberId = '${sessionScope.member}';
-        const productId = '${product.id}';
-        $.ajax({
-            type: "post",
-            url: "/comment/check",
-            data: {"memberId":memberId, "commentId": id},
-            dataType: "text",
-            success: function () {
-                location.href='/comment/hits?memberId=' + memberId + "&commentId=" + id + "&id=" + id + "&productId=" + productId;
-            }
-        });
-    }
-</script>
+<%--<script>--%>
+<%--    const hitsCheck2 = (id) => {--%>
+<%--        const memberId = '${sessionScope.member}';--%>
+<%--        const productId = '${product.id}';--%>
+<%--        $.ajax({--%>
+<%--            type: "post",--%>
+<%--            url: "/comment/check",--%>
+<%--            data: {"memberId":memberId, "commentId": id},--%>
+<%--            dataType: "text",--%>
+<%--            success: function () {--%>
+<%--                location.href='/comment/hits?memberId=' + memberId + "&commentId=" + id + "&id=" + id + "&productId=" + productId;--%>
+<%--            }--%>
+<%--        });--%>
+<%--    }--%>
+<%--</script>--%>
 </html>

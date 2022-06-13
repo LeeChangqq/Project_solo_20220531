@@ -10,7 +10,10 @@
     <select id="check" parameterType="hits" resultType="hits">
         select * from hits_table where memberId=#{memberId} and commentId=#{commentId}
     </select>
-    <select id="duplicateCheck" parameterType="hits" resultType="hits">
-        SELECT * FROM hits_table WHERE memberId = #{mebmerId} AND commentId = #{commentId}
-    </select>
+<!--    <select id="duplicateCheck" parameterType="hits" resultType="hits">-->
+<!--        SELECT * FROM hits_table WHERE memberId = #{mebmerId} AND commentId = #{commentId}-->
+<!--    </select>-->
+    <delete id="delete" parameterType="Long">
+        delete from hits_table where id= #{id}
+    </delete>
 </mapper>

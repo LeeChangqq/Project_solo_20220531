@@ -22,6 +22,12 @@
     <update id="hits" parameterType="Long">
         update comment_table set commentHits=commentHits+1 where id=#{id}
     </update>
+    <select id="findById2" resultType="comment" parameterType="Long">
+        select * from comment_table where id=#{id}
+    </select>
+    <update id="hits2" parameterType="Long">
+        update comment_table set commentHits=commentHits-1 where id=#{id}
+    </update>
 </mapper>
 
 
