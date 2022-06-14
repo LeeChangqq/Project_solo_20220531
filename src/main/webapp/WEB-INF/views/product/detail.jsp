@@ -78,8 +78,8 @@
                             <td></td>
                         </c:when>
                     </c:choose>
-                    <td><a href="javascript:void(0)" onclick="hitsCheck(${comment.id})">좋아요${comment.commentHits}</a></td>
-                    <td><a href="javascript:void(0)" onclick="hitsCheck2(${comment.id})">엄청 좋아요${comment.commentHits}</a></td>
+                        <td><a href="javascript:void(0)" onclick="hitsCheck(${comment.id})"><span id="aa">좋아요${comment.commentHits}</span></a></td>
+<%--                    <td><a href="javascript:void(0)" onclick="hitsCheck2(${comment.id})">엄청 좋아요${comment.commentHits}</a></td>--%>
                 </tr>
             </c:forEach>
         </table>
@@ -121,6 +121,7 @@
                         output += "<td></td>";
                         output += "<td></td>";
                     }
+                    output += "<td>" + "<a href='javascript:void(0)' onclick='hitsCheck(" + result[i].id + ")'>" + "<span id='aa'>" + "좋아요" + result[i].commentHits + "</span>" + "</a>" + "</td>";
                     output += "</tr>";
                 }
                 output += "</table>";
@@ -190,20 +191,23 @@
     }
 </script>
 <script>
-    const hitsCheck = (id) => {
+    const hitsCheck = (id2) => {
         const memberId = '${sessionScope.member}';
         const productId = '${product.id}';
+        const aa = document.getElementById("aa");
         $.ajax({
             type: "post",
             url: "/comment/check",
-            data: {"memberId":memberId, "commentId": id},
+            data: {"memberId":memberId, "commentId": id2},
             dataType: "text",
             success: function (data) {
-                if(data == "ok") {
-                    location.href='/comment/hits?memberId=' + memberId + "&commentId=" + id + "&id=" + id + "&productId=" + productId;
+                if(memberId == ""){
+                    alert("로그인 후 좋아요 가능해");
+                } else if(data == "ok") {
+                    location.href='/comment/hits?memberId=' + memberId + "&commentId=" + id2 + "&id=" + id2 + "&productId=" + productId;
                 }else {
                     // alert("dd")
-                    location.href='/comment/hits2?memberId=' + memberId + "&commentId=" + id + "&id=" + id + "&productId=" + productId;
+                    location.href='/comment/hits2?memberId=' + memberId + "&productId=" + productId + "&commentId=" + id2;
                 }
             }
         });

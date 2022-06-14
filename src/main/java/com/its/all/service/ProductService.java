@@ -9,7 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -42,6 +44,13 @@ public class ProductService {
         } else {
             return false;
         }
+    }
+    public List<ProductDTO> search(String searchType, String q) {
+        Map<String, String> searchParam = new HashMap<>();
+        searchParam.put("type", searchType);
+        searchParam.put("q", q);
+        List<ProductDTO> searchList = productRepository.search(searchParam);
+        return searchList;
     }
 
 //    public ProductDTO myPage(Long id) {

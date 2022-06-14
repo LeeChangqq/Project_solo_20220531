@@ -1,8 +1,6 @@
 package com.its.all.controller;
 
-import com.its.all.dto.CommentDTO;
-import com.its.all.dto.ImageDTO;
-import com.its.all.dto.ProductDTO;
+import com.its.all.dto.*;
 import com.its.all.service.CommentService;
 import com.its.all.service.ImageService;
 import com.its.all.service.ProductService;
@@ -75,6 +73,14 @@ public class ProductController {
         model.addAttribute("image", imageList);
         model.addAttribute("productList",productDTOList);
         model.addAttribute("commentList",commentList);
+        List<HitsDTO> hitsDTO = commentService.hitsFindAll();
+        model.addAttribute("hitsDTO",hitsDTO);
         return "product/detail";
+    }
+    @GetMapping("/search")
+    public String search(@RequestParam("searchType") String searchType, @RequestParam("q") String q, Model model, @RequestParam(value="page", required=false, defaultValue="1") int page){
+        List<ProductDTO> searchList = productService.search(searchType, q);
+        model.addAttribute("product", searchList);
+        return "product/searchList";
     }
 }

@@ -13,6 +13,9 @@
     <select id="findAll" parameterType="product" resultType="product">
         select * from product_table
     </select>
+    <select id="search" parameterType="java.util.HashMap" resultType="product">
+        select * from product_table where ${type} like concat('%', #{q}, '%') order by  id desc
+    </select>
     <insert id="saveFile" parameterType="product">
         insert into product_table(productName, productContents, productProfile, productPrice, productQuantity) values (#{productName},#{productContents},#{productProfile},#{productPrice}, #{productQuantity})
     </insert>

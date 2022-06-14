@@ -27,6 +27,9 @@ public class CommentRepository {
         sql.update("Comment.update", commentDTO);
     }
     public CommentDTO findById(Long id) {
+        return sql.selectOne("Comment.findById", id);
+    }
+    public CommentDTO findById1(Long id) {
         sql.update("Comment.hits", id);
         return sql.selectOne("Comment.findById", id);
     }
@@ -43,8 +46,16 @@ public class CommentRepository {
         return sql.selectOne("Comment.findById2", id);
     }
 
-    public void hitsDelete(Long id) {
-        sql.delete("Hits.delete", id);
+    public int hitsDelete(HitsDTO hitsDTO) {
+        return sql.delete("Hits.delete", hitsDTO);
+    }
+
+    public HitsDTO hitsFind(Long id) {
+        return sql.selectOne("Hits.find",id);
+    }
+
+    public List<HitsDTO> hitsFindAll() {
+        return sql.selectList("Hits.all");
     }
 
 //    public String updateHits(HitsDTO hitsDTO) {

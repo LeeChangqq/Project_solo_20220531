@@ -50,7 +50,7 @@
     </style>
 </head>
 <body>
-<jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
+<jsp:include page="../../layout/header.jsp" flush="false"></jsp:include>
 <a href="/member/save">회원가입</a>
 <a href="/product/findAll">상품 리스트</a>
 <a href="/product/saveFile">상품 등록</a>
@@ -110,7 +110,6 @@ ${sessionScope.memberId.memberId}
                         <c:choose>
                             <c:when test="${sessionScope.member != null}">
                                 <a href="javascript:void(0)" onclick="idCheck(${p.id})" class="cart"><span>장바구니</span></a>
-                                <a href="/buy/buy"  class="cart"><span>구매</span></a>
                             </c:when>
                         </c:choose>
                         <c:choose>

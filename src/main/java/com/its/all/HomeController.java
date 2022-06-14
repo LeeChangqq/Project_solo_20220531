@@ -1,14 +1,15 @@
 package com.its.all;
+
 import com.its.all.dto.MyPageDTO;
 import com.its.all.dto.ProductDTO;
-import com.its.all.service.MyPageService;
+import com.its.all.service.CommentService;
 import com.its.all.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ import java.util.List;
 public class HomeController {
     @Autowired
     ProductService productService;
+    @Autowired
+    CommentService commentService;
     @GetMapping("/")
     public String index(Model model, @ModelAttribute MyPageDTO myPageDTO) {
         List<ProductDTO> productDTO = productService.findAll();

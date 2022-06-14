@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ProductRepository {
@@ -24,6 +25,9 @@ public class ProductRepository {
     }
     public int delete(Long id) {
         return sql.delete("Product.delete", id);
+    }
+    public List<ProductDTO> search(Map<String, String> searchParam) {
+        return sql.selectList("Product.search", searchParam);
     }
 }
 

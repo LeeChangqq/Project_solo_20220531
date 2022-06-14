@@ -11,7 +11,7 @@
         select * from comment_table where productId=#{productId} order by id desc
     </select>
     <delete id="delete" parameterType="Long">
-        delete from comment_table where id= #{id}
+        delete from comment_table where id=#{id}
     </delete>
     <update id="update" parameterType="comment">
         update comment_table set commentContents=#{commentContents}, commentDate=now() where id=#{id}

@@ -57,8 +57,7 @@ public class CommentController {
     }
     @GetMapping("/hits")
     public String hits(@ModelAttribute HitsDTO hitsDTO,@RequestParam("id") Long id,@RequestParam("productId") Long productId){
-        System.out.println(hitsDTO);
-        commentService.findById(id);
+        commentService.findById1(id);
         int result = commentService.hits(hitsDTO);
         System.out.println(id);
         if(result > 0){
@@ -69,15 +68,32 @@ public class CommentController {
     }
     @PostMapping("/check")
     public @ResponseBody String check(@ModelAttribute HitsDTO hitsDTO) {
-        System.out.println(hitsDTO);
         String check = commentService.check(hitsDTO);
         return check;
     }
     @GetMapping("/hits2")
-    public String hits2(@ModelAttribute HitsDTO hitsDTO, @RequestParam("id") Long id, @RequestParam("productId") Long productId) {
-        commentService.findById2(id);
-        commentService.hitsDelete(hitsDTO.getId());
-        return "redirect:/product/detail?id=" + productId;
+    public String hits2(@ModelAttribute HitsDTO hitsDTO, @RequestParam("commentId") Long commentId,@RequestParam("productId") Long productId) {
+        commentService.findById2(commentId);
+        boolean result = commentService.hitsDelete(hitsDTO);
+        System.out.println(hitsDTO.getId());
+        if(result == true){
+            return "redirect:/product/detail?id=" + productId;
+        }else {
+            return "/";
+        }
+
+    }
+    @GetMapping("/hitsFind")
+    public String hitsFind(@RequestParam("id") Long id, Model model){
+        HitsDTO hitsDTO = commentService.hitsFind(id);
+        model.addAttribute("hits", hitsDTO);
+        return "product/detail";
+    }
+    @GetMapping("/hitsFindAll")
+    public String hitsFindAll(Model model){
+        List<HitsDTO> hits = commentService.hitsFindAll();
+        model.addAttribute("hitsList", hits);
+        return "index";
     }
 //    @PostMapping("/updateHits")
 //    public @ResponseBody String updateHits(@ModelAttribute HitsDTO hitsDTO){

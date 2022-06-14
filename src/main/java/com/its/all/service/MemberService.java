@@ -55,6 +55,11 @@ public class MemberService {
     public MemberDTO findById(Long id) {
         return memberRepository.findById(id);
     }
+
+
+
+
+
     private static final int PAGE_LIMIT = 5; // 한페이지에 보여줄 글 갯수
     private static final int BLOCK_LIMIT = 3; // 페이지 번호 갯수
     public List<MemberDTO> pagingList(int page) {

@@ -37,7 +37,6 @@ public class CommentService {
     }
 
     public int hits(HitsDTO hitsDTO) {
-        System.out.println(hitsDTO);
         return commentRepository.hits(hitsDTO);
     }
     public String check(HitsDTO hitsDTO) {
@@ -49,12 +48,27 @@ public class CommentService {
             return "no";
         }
     }
+    public CommentDTO findById1(Long id) {
+        return commentRepository.findById1(id);
+    }
     public CommentDTO findById2(Long id) {
-        System.out.println(id);
         return commentRepository.findById2(id);
     }
-    public void hitsDelete(Long id){
-        commentRepository.hitsDelete(id);
+    public boolean hitsDelete(HitsDTO hitsDTO){
+        int result = commentRepository.hitsDelete(hitsDTO);
+        if(result > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public HitsDTO hitsFind(Long id) {
+        return commentRepository.hitsFind(id);
+    }
+
+    public List<HitsDTO> hitsFindAll() {
+        return commentRepository.hitsFindAll();
     }
 //    public String updateHits(HitsDTO hitsDTO){
 //        return commentRepository.updateHits(hitsDTO);
