@@ -51,7 +51,6 @@
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
-<a href="/member/save">회원가입</a>
 <a href="/product/findAll">상품 리스트</a>
 <a href="/product/saveFile">상품 등록</a>
 <div>
@@ -64,8 +63,8 @@
     </form>
 </div>
 <%--    <a href="/product/detail?id=7">상품 테스트</a>--%>
-${sessionScope.memberId.id}
-${sessionScope.memberId.memberId}
+<%--${sessionScope.memberId.id}--%>
+<%--${sessionScope.memberId.memberId}--%>
 <%--    <div class="main-container">--%>
 <%--        &lt;%&ndash;        <img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="" height="100" width="100">&ndash;%&gt;--%>
 <%--        &lt;%&ndash;        ${product.productName}&ndash;%&gt;--%>
@@ -105,12 +104,18 @@ ${sessionScope.memberId.memberId}
                 <figure>
                     <a href="/product/detail?id=${p.id}"><img src="${pageContext.request.contextPath}/upload/${p.productProfile}" alt="신상품 이미지" width="200" height="200"></a>
                     <figcaption>
-                        <h4><a href="/product/detail?id=${p.id}">${p.productName}</a></h4>
-                        <a href="/product/detail?id=${p.id}"><span>${p.productPrice}원</span></a>
                         <c:choose>
-                            <c:when test="${sessionScope.member != null}">
+                            <c:when test="${p.productQuantity > 0}">
+                                <h4><a href="/product/detail?id=${p.id}">${p.productName}</a></h4>
+                                <a href="/product/detail?id=${p.id}"><span>${p.productPrice}원</span></a>
+                            </c:when>
+                            <c:otherwise>
+                                <span>품절</span>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${sessionScope.member != null && p.productQuantity > 0}">
                                 <a href="javascript:void(0)" onclick="idCheck(${p.id})" class="cart"><span>장바구니</span></a>
-                                <a href="javascript:void(0)" onclick="aa(${p.productPrice})" class="cart"><span>구매</span></a>
                             </c:when>
                         </c:choose>
                         <c:choose>
@@ -232,32 +237,32 @@ ${sessionScope.memberId.memberId}
         });
     }
 </script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script>
-    const aa = (productPrice) => {
-        var IMP = window.IMP;
-        IMP.init('imp20919452');
-        IMP.request_pay({
-            pg : "kakaopay",
-            pay_method : 'card',
-            merchant_uid : 'merchant_' + new Date().getTime(),
-            name : '결제',
-            amount : productPrice,
-            buyer_email : '${sessionScope.memberId.memberEmail}',
-            buyer_name : '${sessionScope.memberId.memberName}',
-            buyer_tel : '${sessionScope.memberId.memberMobile}',
-            buyer_addr : '${sessionScope.memberId.memberLocal}',
-            buyer_postcode : '${sessionScope.memberId.memberLocal2}',
-        }, function(rsp) {
-            if ( rsp.success ) {
-                var msg = '결제가 완료되었습니다.';
-                console.log("성공")
-            } else {
-                console.log("실패")
-                var msg = '결제에 실패하였습니다.';
+<%--<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>--%>
+<%--<script>--%>
+<%--    const aa = (productPrice) => {--%>
+<%--        var IMP = window.IMP;--%>
+<%--        IMP.init('imp20919452');--%>
+<%--        IMP.request_pay({--%>
+<%--            pg : "kakaopay",--%>
+<%--            pay_method : 'card',--%>
+<%--            merchant_uid : 'merchant_' + new Date().getTime(),--%>
+<%--            name : '결제',--%>
+<%--            amount : productPrice,--%>
+<%--            buyer_email : '${sessionScope.memberId.memberEmail}',--%>
+<%--            buyer_name : '${sessionScope.memberId.memberName}',--%>
+<%--            buyer_tel : '${sessionScope.memberId.memberMobile}',--%>
+<%--            buyer_addr : '${sessionScope.memberId.memberLocal}',--%>
+<%--            buyer_postcode : '${sessionScope.memberId.memberLocal2}',--%>
+<%--        }, function(rsp) {--%>
+<%--            if ( rsp.success ) {--%>
+<%--                var msg = '결제가 완료되었습니다.';--%>
+<%--                console.log("성공")--%>
+<%--            } else {--%>
+<%--                console.log("실패")--%>
+<%--                var msg = '결제에 실패하였습니다.';--%>
 
-            }
-        });
-    }
-</script>
+<%--            }--%>
+<%--        });--%>
+<%--    }--%>
+<%--</script>--%>
 </html>

@@ -29,6 +29,9 @@ public class ProductRepository {
     public List<ProductDTO> search(Map<String, String> searchParam) {
         return sql.selectList("Product.search", searchParam);
     }
+    public void quantityUpdate(ProductDTO productDTO){
+        sql.update("Product.productQuantity",productDTO);
+    }
 }
 
 

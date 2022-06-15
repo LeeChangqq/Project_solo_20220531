@@ -53,6 +53,10 @@ public class ProductService {
         return searchList;
     }
 
+    public void quantityUpdate (ProductDTO productDTO) {
+        productRepository.quantityUpdate(productDTO);
+    }
+
 //    public ProductDTO myPage(Long id) {
 //        return productRepository.myPage(id);
 //    }

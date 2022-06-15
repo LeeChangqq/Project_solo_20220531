@@ -110,6 +110,7 @@ ${sessionScope.memberId.memberId}
                         <c:choose>
                             <c:when test="${sessionScope.member != null}">
                                 <a href="javascript:void(0)" onclick="idCheck(${p.id})" class="cart"><span>장바구니</span></a>
+                                <a href="javascript:void(0)" onclick="aa(${p.productPrice})" class="cart"><span>구매</span></a>
                             </c:when>
                         </c:choose>
                         <c:choose>
@@ -227,6 +228,34 @@ ${sessionScope.memberId.memberId}
             },
             error: function (){
                 alert("에러")
+            }
+        });
+    }
+</script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script>
+    const aa = (productPrice) => {
+        var IMP = window.IMP;
+        IMP.init('imp20919452');
+        IMP.request_pay({
+            pg : "kakaopay",
+            pay_method : 'card',
+            merchant_uid : 'merchant_' + new Date().getTime(),
+            name : '결제',
+            amount : productPrice,
+            buyer_email : '${sessionScope.memberId.memberEmail}',
+            buyer_name : '${sessionScope.memberId.memberName}',
+            buyer_tel : '${sessionScope.memberId.memberMobile}',
+            buyer_addr : '${sessionScope.memberId.memberLocal}',
+            buyer_postcode : '${sessionScope.memberId.memberLocal2}',
+        }, function(rsp) {
+            if ( rsp.success ) {
+                var msg = '결제가 완료되었습니다.';
+                console.log("성공")
+            } else {
+                console.log("실패")
+                var msg = '결제에 실패하였습니다.';
+
             }
         });
     }

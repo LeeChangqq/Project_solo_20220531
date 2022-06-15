@@ -36,6 +36,12 @@
                 </c:when>
                 <c:otherwise>
                     <div class="logout-container">
+                        <a href="/buy/list?memberId=${sessionScope.member}">구매내역</a>
+                    </div>
+                    <div class="symbol-container">
+                        <a>|</a>
+                    </div>
+                    <div class="logout-container">
                         <a href="/member/logout">로그아웃</a>
                     </div>
                     <div class="symbol-container">

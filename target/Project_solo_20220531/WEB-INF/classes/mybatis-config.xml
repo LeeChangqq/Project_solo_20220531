@@ -9,5 +9,6 @@
         <typeAlias type="com.its.all.dto.ImageDTO" alias="image"></typeAlias>
         <typeAlias type="com.its.all.dto.CommentDTO" alias="comment"></typeAlias>
         <typeAlias type="com.its.all.dto.HitsDTO" alias="hits"></typeAlias>
+        <typeAlias type="com.its.all.dto.BuyDTO" alias="buy"></typeAlias>
     </typeAliases>
 </configuration>

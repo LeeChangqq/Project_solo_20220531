@@ -19,6 +19,8 @@
 <body>
 <jsp:include page="../../layout/header.jsp" flush="false"></jsp:include>
 <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="신상품 이미지" width="200" height="200"></a><br>
+구매 수량<input type="text" value="" id="myQuantity" name="myQuantity">
+<a href="javascript:void(0)" onclick="aa()" class="cart"><span>구매</span></a><br>
 <c:forEach items="${image}" var="image">
     <c:choose>
         <c:when test="${image.productId == product.id}">
@@ -211,6 +213,41 @@
                 }
             }
         });
+    }
+</script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script>
+    const aa = () => {
+        const myQuantity = document.getElementById("myQuantity");
+        const myQuantity2 = '${product.productQuantity}' - myQuantity.value;
+        const productPrice = '${product.productPrice}';
+        if(myQuantity.value == 0){
+            alert("0개는 못산다")
+        }else if(myQuantity2 < 0) {
+                alert("재고 없어 줄여");
+        }else {
+            var IMP = window.IMP;
+            IMP.init('imp20919452');
+            IMP.request_pay({
+                pg : "kakaopay",
+                pay_method : 'card',
+                merchant_uid : 'merchant_' + new Date().getTime(),
+                name : '결제',
+                amount : productPrice * myQuantity.value,
+                buyer_email : '${sessionScope.memberId.memberEmail}',
+                buyer_name : '${sessionScope.memberId.memberName}',
+                buyer_tel : '${sessionScope.memberId.memberMobile}',
+                buyer_addr : '${sessionScope.memberId.memberLocal}',
+                buyer_postcode : '${sessionScope.memberId.memberLocal2}',
+            }, function(rsp) {
+                if ( rsp.success ) {
+                    var msg = '결제가 완료되었습니다.';
+                    location.href="/buy/buy2?memberId=" + ${sessionScope.member} + "&productQuantity=" + myQuantity2 + "&productId=" + ${product.id} + "&id=" + ${product.id} + "&myQuantity=" + myQuantity.value;
+                } else {
+                    var msg = '결제에 실패하였습니다.';
+                }
+            });
+        }
     }
 </script>
 <%--<script>--%>

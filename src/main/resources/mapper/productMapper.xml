@@ -31,6 +31,9 @@
     <select id="findById" resultType="product" parameterType="Long">
         select * from product_table where id=#{id}
     </select>
+    <update id="productQuantity" parameterType="product">
+        update product_table set productQuantity=#{productQuantity} where id=#{id}
+    </update>
     <!--    <update id="hits" parameterType="Long">-->
     <!--        update b_table set bHits=bHits+1 where id=#{id}-->
     <!--    </update>-->
