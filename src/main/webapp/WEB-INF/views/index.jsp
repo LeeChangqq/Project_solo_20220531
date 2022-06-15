@@ -51,8 +51,12 @@
 </head>
 <body>
 <jsp:include page="../layout/header.jsp" flush="false"></jsp:include>
-<a href="/product/findAll">상품 리스트</a>
-<a href="/product/saveFile">상품 등록</a>
+<c:choose>
+    <c:when test="${sessionScope.memberId.memberId == 'admin'}">
+        <a href="/product/saveFile">상품 등록</a>
+        <a href="/buy/list2">구매자리스트</a>
+    </c:when>
+</c:choose>
 <div>
     <form action="/product/search" method="get">
         <select name="searchType">

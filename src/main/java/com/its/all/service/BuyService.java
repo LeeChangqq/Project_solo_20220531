@@ -19,4 +19,8 @@ public class BuyService {
     public List<BuyDTO> findAll(Long id) {
         return buyRepository.findAll(id);
     }
+
+    public List<BuyDTO> findAll2() {
+        return buyRepository.findAll2();
+    }
 }

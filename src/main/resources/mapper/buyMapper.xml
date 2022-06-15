@@ -8,6 +8,9 @@
         insert into buy_table(memberId, productId, myQuantity, buyDate) values (#{memberId},#{productId},#{myQuantity},now())
     </insert>
     <select id="findAll" parameterType="Long" resultType="buy">
-        select * from buy_table where memberId=#{memberId}
+        select * from buy_table where memberId=#{memberId} order by id desc
+    </select>
+    <select id="findAll2" parameterType="buy" resultType="buy">
+        select * from buy_table where id order by id desc
     </select>
 </mapper>

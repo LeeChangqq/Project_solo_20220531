@@ -15,22 +15,63 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="/resources/css/style.css">
+    <style>
+        .main-image-container{
+            margin-left: 1%;
+            padding-left: 200px;
+            width: 30px;
+            height: 7%;
+            margin-bottom: 10%;
+            margin-top: 6%;
+        }
+        .image-container{
+            margin-top: 10%;
+            margin-left: 20%;
+            padding-left: 65px;
+
+        }
+        .product-container{
+            margin-left: 40%;
+            padding-left: 300px;
+            margin-top: 20%;
+        }
+        input{
+            width: 5%;
+            height: 3%;
+        }
+        .delete-container{
+            padding-left: 50%;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../../layout/header.jsp" flush="false"></jsp:include>
-<a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="신상품 이미지" width="200" height="200"></a><br>
-구매 수량<input type="text" value="" id="myQuantity" name="myQuantity">
-<a href="javascript:void(0)" onclick="aa()" class="cart"><span>구매</span></a><br>
+<div class="main-image-container">
+    <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="신상품 이미지" width="500" height="500"></a>
+</div>
+<div class="product-container">
+    ${product.productContents}<br>
+    구매 수량<input type="text" value="" id="myQuantity" name="myQuantity">
+    <a href="javascript:void(0)" onclick="aa()" class="cart"><span>구매</span></a><br>
+</div>
 <c:forEach items="${image}" var="image">
     <c:choose>
         <c:when test="${image.productId == product.id}">
-            <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${image.image}" alt="신상품 이미지" width="200" height="200"></a>
-            <a href="/image/delete?id=${image.id}&productId=${product.id}">삭제</a>
+            <div class="image-container">
+                <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${image.image}" alt="신상품 이미지" width="1000" height="2000"></a>
+            </div>
+            <c:choose>
+                <c:when test="${sessionScope.memberId.memberId == 'admin'}">
+                    <div class="delete-container">
+                        <a href="/image/delete?id=${image.id}&productId=${product.id}">삭제</a>
+                    </div>
+                </c:when>
+            </c:choose>
         </c:when>
     </c:choose>
 </c:forEach>
 <br>
-<div class="container">
+<div class="container" style="margin-top: 5%">
     <div id="comment-write" class="input-group mb-3 form-floating">
         <input type="text" id="commentWriter" class="form-control" value="${sessionScope.memberId.memberId}" readonly>
         <label for="commentWriter">작성자</label>

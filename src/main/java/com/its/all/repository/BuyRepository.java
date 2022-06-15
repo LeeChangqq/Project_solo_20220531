@@ -19,4 +19,9 @@ public class BuyRepository {
     public List<BuyDTO> findAll(Long id) {
         return sql.selectList("Buy.findAll", id);
     }
+
+    public List<BuyDTO> findAll2() {
+        return sql.selectList("Buy.findAll2");
+    }
+
 }

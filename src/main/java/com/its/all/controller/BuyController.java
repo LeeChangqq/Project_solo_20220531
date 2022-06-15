@@ -8,10 +8,7 @@ import com.its.all.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,8 +37,17 @@ public class BuyController {
     @GetMapping("list")
     public String findAll(@RequestParam("memberId") Long id, Model model) {
         List<BuyDTO> buyDTOList = buyService.findAll(id);
+        List<ProductDTO> productDTOList = productService.findAll();
         model.addAttribute("buyList", buyDTOList);
+        model.addAttribute("product", productDTOList);
         return "buy/list";
     }
-
+    @GetMapping("list2")
+    public String findAll2(Model model) {
+        List<BuyDTO> buyDTOList = buyService.findAll2();
+        List<ProductDTO> productDTOList = productService.findAll();
+        model.addAttribute("buyList", buyDTOList);
+        model.addAttribute("product", productDTOList);
+        return "buy/buyList";
+    }
 }
