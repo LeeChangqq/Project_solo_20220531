@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="../../layout/header.jsp" flush="false"></jsp:include>
 <form action="/product/saveFile" method="post" enctype="multipart/form-data">
     <input type="text" name="productName" placeholder="상품이름">
     <input type="text" name="productContents" placeholder="상품 설명">

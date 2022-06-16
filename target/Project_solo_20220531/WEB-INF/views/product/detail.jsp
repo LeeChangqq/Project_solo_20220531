@@ -15,22 +15,188 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="/resources/css/style.css">
+    <style>
+        .product-container {
+            width: 70%;
+            margin-left: 15%;
+        }
+        .product-detail-container {
+            display: flex;
+            padding: 20px 20px;
+        }
+        .product-img-container {
+            width: 500px;
+            height: 500px;
+        }
+        .product-img-container .product-img {
+            padding: 0 2px 2px 0;
+            width: 500px;
+            height: 500px;
+        }
+        .product-intro-container {
+            width: 500px;
+            height: 500px;
+            margin-left: 15%;
+        }
+        .product-name-wrap {
+            margin-bottom: 20px;
+        }
+        .product-name-wrap h2 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+        .product-contents-wrap {
+            height: 275px;
+            margin-bottom: 40px;
+            line-height: 1.75rem;
+        }
+        .product-stock-price-wrap {
+            display: flex;
+            margin-bottom: 40px;
+        }
+        .product-stock-wrap span {
+            font-size: 18px;
+        }
+        .product-price-wrap {
+            margin-left: auto;
+        }
+        .product-price-wrap .won-symbol {
+            margin-right: 20px;
+        }
+        .button-container {
+            display: flex;
+        }
+        .product-quantity {
+            width: 50px;
+            height: 38px;
+            margin-left: 20px;
+        }
+        .button-container .input-quantity {
+            width: 150px;
+            display: flex;
+        }
+        .button-container .cart-save-button {
+            margin-left: 20px;
+        }
+        .product-detail-img-container {
+            margin-top: 100px;
+        }
+        .product-detail-img-title {
+            border-bottom: 1px solid #aaa;
+            margin-bottom: 40px;
+        }
+        .detail-img {
+            padding: 0 100px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../../layout/header.jsp" flush="false"></jsp:include>
-<a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="신상품 이미지" width="200" height="200"></a><br>
-구매 수량<input type="text" value="" id="myQuantity" name="myQuantity">
-<a href="javascript:void(0)" onclick="aa()" class="cart"><span>구매</span></a><br>
-<c:forEach items="${image}" var="image">
-    <c:choose>
-        <c:when test="${image.productId == product.id}">
-            <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${image.image}" alt="신상품 이미지" width="200" height="200"></a>
-            <a href="/image/delete?id=${image.id}&productId=${product.id}">삭제</a>
-        </c:when>
-    </c:choose>
-</c:forEach>
+
+<div class="product-container">
+    <div class="product-detail-container">
+        <div class="product-img-container">
+            <img class="product-img" src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="신상품 이미지">
+        </div>
+
+        <div class="product-intro-container">
+            <div class="product-name-wrap">
+                <h2 class="product-name">${product.productName}</h2>
+            </div>
+
+            <div class="product-contents-wrap">
+                <span class="product-contents">${product.productContents} Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+            </div>
+
+            <div class="product-stock-price-wrap">
+                <div class="product-stock-wrap">
+                    <span>재고 : </span>
+                    <span class="product-stock-wrap">${product.productQuantity}</span>
+                </div>
+
+                <div class="product-price-wrap">
+                    <span class="won-symbol">₩</span>
+                    <span class="product-price">${product.productPrice}</span>
+                </div>
+            </div>
+
+            <div class="button-container">
+                <div class="input-quantity">
+                    <span>수량 : </span>
+                    <input type="text" class="product-quantity" id="myQuantity" name="myQuantity">
+                </div>
+                <div class="product-buy">
+                    <button type="button" class="btn btn-dark" onclick="aa()">구매</button>
+                </div>
+                <div class="cart-save-button">
+                    <button type="button" class="btn btn-outline-dark" onclick="a123(${product.id})">장바구니</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-detail-img-container">
+        <div class="product-detail-img-title">
+            <h2>상세 이미지</h2>
+        </div>
+        <div class="detail-img">
+            <c:forEach var="image" items="${image}">
+                <c:choose>
+                    <c:when test="${image.productId == product.id}">
+                        <div class="image-container">
+                            <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${image.image}" alt="신상품 이미지" width="800" height="800"></a>
+                        </div>
+                <c:choose>
+                    <c:when test="${sessionScope.memberId.memberId == 'admin'}">
+                        <div class="delete-container">
+                            <a href="/image/delete?id=${image.id}&productId=${product.id}">삭제</a>
+                        </div>
+                    </c:when>
+                </c:choose>
+                    </c:when>
+                </c:choose>
+            </c:forEach>
+        </div>
+    </div>
+</div>
+<%--<div class="main-image-container">--%>
+<%--    <div>--%>
+<%--        <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="신상품 이미지" width="500" height="500"></a>--%>
+<%--    </div>--%>
+<%--    <div class="product-container-main">--%>
+<%--        <div>--%>
+<%--            ${product.productName}--%>
+<%--        </div>--%>
+<%--        <div>--%>
+<%--            ${product.productContents}--%>
+<%--        </div>--%>
+<%--        <div>--%>
+<%--            구매 수량<input type="text" value="" id="myQuantity" name="myQuantity">--%>
+<%--        </div>--%>
+<%--        <div>--%>
+<%--            <a href="javascript:void(0)" onclick="aa()" class="cart"><span>구매</span></a><br>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<c:forEach items="${image}" var="image">--%>
+<%--    <c:choose>--%>
+<%--        <c:when test="${image.productId == product.id}">--%>
+<%--            <div class="image-container">--%>
+<%--                <a href="/product/detail?id=${product.id}"><img src="${pageContext.request.contextPath}/upload/${image.image}" alt="신상품 이미지" width="1000" height="2000"></a>--%>
+<%--            </div>--%>
+<%--            <c:choose>--%>
+<%--                <c:when test="${sessionScope.memberId.memberId == 'admin'}">--%>
+<%--                    <div class="delete-container">--%>
+<%--                        <a href="/image/delete?id=${image.id}&productId=${product.id}">삭제</a>--%>
+<%--                    </div>--%>
+<%--                </c:when>--%>
+<%--            </c:choose>--%>
+<%--        </c:when>--%>
+<%--    </c:choose>--%>
+<%--</c:forEach>--%>
 <br>
-<div class="container">
+<div class="container" style="margin-top: 5%">
     <div id="comment-write" class="input-group mb-3 form-floating">
         <input type="text" id="commentWriter" class="form-control" value="${sessionScope.memberId.memberId}" readonly>
         <label for="commentWriter">작성자</label>
@@ -250,6 +416,76 @@
         }
     }
 </script>
+<script>
+    const a123 = (id) => {
+        const member = '${sessionScope.member}';
+        $.ajax({
+            type: "post",
+            url: "/myPage/check",
+            data: {"productId": id, "memberId":member},
+            dataType: "text",
+            success: function (data) {
+                if(data == "ok") {
+                    location.href="/myPage/save?memberId=" + member + "&productId=" + id;
+                }else {
+                    alert("장바구니에 이미 있어")
+                }
+            },
+            error: function (){
+                alert("에러")
+            }
+        });
+    }
+</script>
+<%--<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>--%>
+<%--<script>--%>
+<%--    const aa = () => {--%>
+<%--        const myQuantity = document.getElementById("myQuantity");--%>
+<%--        const myQuantity2 = '${product.productQuantity}';--%>
+<%--        const productPrice = '${product.productPrice}';--%>
+<%--        if(myQuantity.value == 0){--%>
+<%--            alert("0못삼")--%>
+<%--        }else if(myQuantity2 < myQuantity.value) {--%>
+<%--            alert("재고 없어 줄여주세요");--%>
+<%--        }else {--%>
+<%--            var IMP = window.IMP;--%>
+<%--            IMP.init('imp20919452');--%>
+<%--            IMP.request_pay({--%>
+<%--                pg : "kakaopay",--%>
+<%--                pay_method : 'card',--%>
+<%--                merchant_uid : 'merchant_' + new Date().getTime(),--%>
+<%--                name : '결제',--%>
+<%--                amount : productPrice * myQuantity.value,--%>
+<%--                buyer_email : '${sessionScope.memberId.memberEmail}',--%>
+<%--                buyer_name : '${sessionScope.memberId.memberName}',--%>
+<%--                buyer_tel : '${sessionScope.memberId.memberMobile}',--%>
+<%--                buyer_addr : '${sessionScope.memberId.memberLocal}',--%>
+<%--                buyer_postcode : '${sessionScope.memberId.memberLocal2}',--%>
+<%--            }, function(rsp) {--%>
+<%--                if ( rsp.success ) {--%>
+<%--                    var msg = '결제가 완료되었습니다.';--%>
+<%--                    location.href="/buy/buy2?memberId=" + ${sessionScope.member} + "&productQuantity=" + myQuantity2 + "&productId=" + ${product.id} + "&id=" + ${product.id} + "&myQuantity=" + myQuantity.value;--%>
+<%--                } else {--%>
+<%--                    var msg = '결제에 실패하였습니다.';--%>
+<%--                }--%>
+<%--            });--%>
+<%--        }--%>
+<%--    }--%>
+<%--</script>--%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <%--<script>--%>
 <%--    const hitsCheck2 = (id) => {--%>
 <%--        const memberId = '${sessionScope.member}';--%>

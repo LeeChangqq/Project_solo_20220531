@@ -170,6 +170,7 @@
             </div>
             <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="btn">
             <input type="button" onclick="click1()" value="가입하기" class="btn">
+            <input type="button" onclick="c()" value="취소" class="btn">
         </form>
 </body>
 <script>
@@ -336,6 +337,11 @@
                 });
             }
         }).open();
+    }
+</script>
+<script>
+    const c = () => {
+        location.href="/";
     }
 </script>
 </html>
