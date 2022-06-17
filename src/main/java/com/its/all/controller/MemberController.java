@@ -96,7 +96,7 @@ public class MemberController {
         boolean result = memberService.delete(id);
         if (result) {
             session.invalidate();
-            return "index";
+            return "redirect:/";
         } else {
             return "delete-fail";
         }
@@ -109,14 +109,14 @@ public class MemberController {
         return "member/detail";
     }
 
-    @GetMapping("/paging")
-    public String paging(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model) {
-        List<MemberDTO> memberList = memberService.pagingList(page);
-        PageDTO paging = memberService.paging(page);
-        model.addAttribute("member", memberList);
-        model.addAttribute("paging", paging);
-        return "index";
-    }
+//    @GetMapping("/paging")
+//    public String paging(@RequestParam(value = "page", required = false, defaultValue = "1") int page, Model model) {
+//        List<MemberDTO> memberList = memberService.pagingList(page);
+//        PageDTO paging = memberService.paging(page);
+//        model.addAttribute("member", memberList);
+//        model.addAttribute("paging", paging);
+//        return "index";
+//    }
 
     @GetMapping("/check")
     public String check(@RequestParam Long id, Model model) {

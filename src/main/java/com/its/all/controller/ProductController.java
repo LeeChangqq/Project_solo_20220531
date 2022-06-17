@@ -66,14 +66,14 @@ public class ProductController {
     @GetMapping("/detail")
     public String findById(@RequestParam("id") Long id, Model model){
         ProductDTO productDTO = productService.findById(id);
-        model.addAttribute("product", productDTO);
         List<ProductDTO> productDTOList = productService.findAll();
         List<ImageDTO> imageList = imageService.findAll();
         List<CommentDTO> commentList = commentService.findAll(id);
+        List<HitsDTO> hitsDTO = commentService.hitsFindAll();
+        model.addAttribute("product", productDTO);
         model.addAttribute("image", imageList);
         model.addAttribute("productList",productDTOList);
         model.addAttribute("commentList",commentList);
-        List<HitsDTO> hitsDTO = commentService.hitsFindAll();
         model.addAttribute("hitsDTO",hitsDTO);
         return "product/detail";
     }

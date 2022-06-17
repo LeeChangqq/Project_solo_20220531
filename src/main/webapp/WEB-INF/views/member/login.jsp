@@ -23,7 +23,7 @@
 <%--    </form>--%>
 <%--</div>--%>
 <div class="container">
-    <h1>로그인 폼</h1>
+    <h1>로그인</h1>
     <form action="/member/login" method="post">
         <div class="form-control">
             <input type="text" name="memberId" id="memberId" required />

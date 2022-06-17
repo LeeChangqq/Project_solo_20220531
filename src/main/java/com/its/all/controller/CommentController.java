@@ -83,18 +83,18 @@ public class CommentController {
         }
 
     }
-    @GetMapping("/hitsFind")
-    public String hitsFind(@RequestParam("id") Long id, Model model){
-        HitsDTO hitsDTO = commentService.hitsFind(id);
-        model.addAttribute("hits", hitsDTO);
-        return "product/detail";
-    }
-    @GetMapping("/hitsFindAll")
-    public String hitsFindAll(Model model){
-        List<HitsDTO> hits = commentService.hitsFindAll();
-        model.addAttribute("hitsList", hits);
-        return "index";
-    }
+//    @GetMapping("/hitsFind")
+//    public String hitsFind(@RequestParam("id") Long id, Model model){
+//        HitsDTO hitsDTO = commentService.hitsFind(id);
+//        model.addAttribute("hits", hitsDTO);
+//        return "product/detail";
+//    }
+//    @GetMapping("/hitsFindAll")
+//    public String hitsFindAll(Model model){
+//        List<HitsDTO> hits = commentService.hitsFindAll();
+//        model.addAttribute("hitsList", hits);
+//        return "index";
+//    }
 //    @PostMapping("/updateHits")
 //    public @ResponseBody String updateHits(@ModelAttribute HitsDTO hitsDTO){
 //        String result = commentService.updateHits(hitsDTO);
