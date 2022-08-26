@@ -277,11 +277,12 @@
                     output += "<tr>";
                     output += "<td>"+result[i].id+"</td>";
                     output += "<td>"+result[i].commentWriter+"</td>";
-                    output += "<td id='contents'" + result[i].id + ">" + result[i].commentContents+"</td>";
+                    output += "<td id='contents" + result[i].id + "'>" + result[i].commentContents+"</td>";
                     output += "<td>"+moment(result[i].commentDate).format("YYYY-MM-DD HH:mm:ss")+"</td>";
                     if(member == result[i].commentWriter){
                         output += "<td>" + "<a href='/comment/delete?productId=" + productId + "&id=" + result[i].id + "'>" + a + "</a>"+"</td>";
-                        output += "<td>" + "<a href='javascript:aaa3();'>" + "수정" + "</a>"+"</td>";
+                        output += "<td id='updateBTN" + result[i].id  + "'>" + "<a href='javascript:void(0)' onclick='aaa3(" + result[i].id + ")'>" + "수정" + "</a>"+"</td>";
+                        <%--<td id="updateBTN${comment.id}"><a href="javascript:void(0)" onclick="aaa3(${comment.id})">수정</a></td>--%>
                     }else if(member == 'admin'){
                         output += "<td>" + "<a href='/comment/delete?productId=" + productId + "&id=" + result[i].id + "'>" + a + "</a>"+"</td>";
                         output += "<td></td>";

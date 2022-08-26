@@ -64,8 +64,6 @@
     </form>
 </div>
 <%--    <a href="/product/detail?id=7">상품 테스트</a>--%>
-${sessionScope.memberId.id}
-${sessionScope.memberId.memberId}
 <%--    <div class="main-container">--%>
 <%--        &lt;%&ndash;        <img src="${pageContext.request.contextPath}/upload/${product.productProfile}" alt="" height="100" width="100">&ndash;%&gt;--%>
 <%--        &lt;%&ndash;        ${product.productName}&ndash;%&gt;--%>

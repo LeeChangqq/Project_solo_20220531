@@ -26,7 +26,7 @@ public class BuyController {
         myPageService.delete(my);
         productService.quantityUpdate(productDTO);
         buyService.save(buyDTO);
-            return "redirect:/myPage/findAll";
+        return "redirect:/myPage/findAll";
     }
     @GetMapping("/buy2")
     public String buy2(@ModelAttribute ProductDTO productDTO,@ModelAttribute BuyDTO buyDTO) {
